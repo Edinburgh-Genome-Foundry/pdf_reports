@@ -1,11 +1,11 @@
 PDF Reports
 ===========
 
-.. image:: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf-reports.svg?branch=master
+.. image:: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master
    :target: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf-reports
    :alt: Travis CI build status
 
-.. image:: https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf-reports/badge.svg?branch=master
+.. image:: https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master
    :target: https://coveralls.io/github/Edinburgh-Genome-Foundry/pdf-reports?branch=master
 
 
