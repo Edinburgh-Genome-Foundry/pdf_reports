@@ -5,7 +5,7 @@ import jinja2
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 STYLESHEET = os.path.join(THIS_PATH, 'css', 'style.css')
-
+EGF_LOGO_URL = os.path.join(THIS_PATH, 'css', 'egf-logo.svg')
 
 def pug_to_html(filepath=None, string=None, **variables):
     """Convert a Pug template, as file or string, to html.
