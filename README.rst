@@ -33,7 +33,7 @@ Your Python code will be as follows:
 
 And your final result may look like this (`PDF file <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/example.pdf>`_):
 
-.. image:: https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.jpg
+.. image:: https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png
 
 There is no documentation at the moment but since it is only two functions you can just have a look at their `in-code documentation <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/pdf_reports/pdf_reports.py>`_.
 
@@ -62,6 +62,5 @@ Alternatively, you can unzip the sources in a folder and type
 License = MIT
 --------------
 
-This open-source software project was originally written at the `Edinburgh Genome Foundry
-<http://www.genomefoundry.org/>`_ by `Zulko <https://github.com/Zulko>`_
+This open-source software project was originally written at the Edinburgh Genome Foundry by `Zulko <https://github.com/Zulko>`_
 and `released on Github <https://github.com/Edinburgh-Genome-Foundry/pdf_reports>`_ under the MIT licence (¢ Edinburg Genome Foundry). Everyone is welcome to contribute !
