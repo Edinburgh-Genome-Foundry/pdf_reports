@@ -1,16 +1,21 @@
 import os
 import weasyprint
-import pypugjs
 import jinja2
+import tempfile
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 STYLESHEET = os.path.join(THIS_PATH, 'css', 'style.css')
 EGF_LOGO_URL = os.path.join(THIS_PATH, 'css', 'egf-logo.svg')
 
-def pug_to_html(filepath=None, string=None, **variables):
+GLOBALS = {
+    "egf_logo_url": EGF_LOGO_URL,
+    'list': list
+}
+
+def pug_to_html(path=None, string=None, **context):
     """Convert a Pug template, as file or string, to html.
 
-    filepath
+    path
       Path to a .pug template file. The ``string`` parameter can be provided
       instead.
 
@@ -23,11 +28,25 @@ def pug_to_html(filepath=None, string=None, **variables):
       (if it contains variables). For instance ``title='My title'``.
 
     """
-    if filepath is not None:
-        with open(filepath, "r") as f:
-            string = f.read()
-    jinja_template = pypugjs.simple_convert(string)
-    return jinja2.Template(jinja_template).render(**variables)
+    default = {k: v for (k,v) in GLOBALS.items()}
+    default.update(context)
+    context = default
+    if string is not None:
+        template_path = tempfile.mktemp(suffix='.pug')
+        with open(template_path, 'w+') as f:
+            f.write(string)
+        if path is None:
+            path = template_path
+    else:
+        template_path = path
+    basepath, filename = os.path.split(template_path)
+    env = jinja2.Environment(
+        loader=jinja2.FileSystemLoader(basepath if basepath else '.'),
+        extensions=['pypugjs.ext.jinja.PyPugJSExtension']
+    )
+
+    template = env.get_template(filename)
+    return template.render(context)
 
 
 def write_report(html, target, base_url=None, use_default_styling=True,
