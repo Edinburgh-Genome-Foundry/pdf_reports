@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import pandas
 
 def dataframe_to_html(dataframe, extra_classes=(), index=False, escape=False):
     """Return a HTML version of a dataframe with Semantic UI CSS style classes.
@@ -8,7 +9,11 @@ def dataframe_to_html(dataframe, extra_classes=(), index=False, escape=False):
     """
     classes = ('ui', 'compact', 'celled', 'striped',
                'table', 'groups') + extra_classes
-    return dataframe.to_html(classes=classes, index=index, escape=escape)
+    current_colwidth = pandas.get_option('display.max_colwidth')
+    pandas.set_option('display.max_colwidth', -1)
+    result = dataframe.to_html(classes=classes, index=index, escape=escape)
+    pandas.set_option('display.max_colwidth', current_colwidth)
+    return result
 
 def style_table_rows(table_html, tr_modifier):
     soup = BeautifulSoup(table_html, "html.parser")
