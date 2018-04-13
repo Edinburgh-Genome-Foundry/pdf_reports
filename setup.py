@@ -25,4 +25,5 @@ setup(name='pdf_reports',
       keywords="PDF report web jinja weasyprint",
       packages=find_packages(exclude='docs'),
       include_package_data=True,
-      install_requires=["pypugjs", "jinja2", "weasyprint", "beautifulsoup4"])
+      install_requires=["pypugjs", "jinja2", "weasyprint", "beautifulsoup4",
+                        "pandas"])
