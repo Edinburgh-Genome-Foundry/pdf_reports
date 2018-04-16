@@ -59,6 +59,8 @@ Alternatively, you can unzip the sources in a folder and type
 
     sudo python setup.py install
 
+Note: on some Debian systems you may need to first install ``libffi-dev`` (``apt install libffi-dev``).
+
 License = MIT
 --------------
 
