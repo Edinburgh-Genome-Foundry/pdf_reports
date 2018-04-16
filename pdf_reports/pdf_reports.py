@@ -78,7 +78,7 @@ def write_report(html, target=None, base_url=None, use_default_styling=True,
     stylesheets = use_default_styling * (STYLESHEET,) + extra_stylesheets
     if target is None:
         with BytesIO() as buffer:
-            write_report("<h1>Bla</h1>", buffer)
+            weasy_html.write_pdf(buffer, stylesheets=stylesheets)
             pdf_data = buffer.getvalue()
         return pdf_data
     else:
