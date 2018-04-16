@@ -1,11 +1,18 @@
-#egf-logo
+img(style="width:400px; display:block; margin:0 auto;"
+    src="file:///{{ egf_logo_url }}")
 
 #sidebar: p Hey, I am a sidebar text ! I make your document look much more serious.
 
+
 h1 {{ title }}
 
+
 .ui.piled.segment: p.
-  Oh hi there ! I am some text in a cool box. What you are looking at is a PDF report made with a library called #[a(href='https://github.com/Edinburgh-Genome-Foundry/DnaWeaver') PDF reports] (how original...) This library uses the Semantic UI CSS framework - hence the cool box.
+  Oh hi there ! I am some text in a cool box. What you are looking at is a PDF
+  report made with a library called
+  #[a(href='https://github.com/Edinburgh-Genome-Foundry/DnaWeaver') PDF reports]
+  (how original...) This library uses the Semantic UI CSS framework - hence the
+  cool box.
 
 :markdown
   You can install `pdf_reports` with Python's PIP:
@@ -14,9 +21,11 @@ h1 {{ title }}
   pip install pdf_reports
   ```
   
-  There are **many** things you can do with Pug and [Semantic UI](https://semantic-ui.com/) and we will cram all of them in this one page so that it will make a nice screenshot. By the way, this paragraph is written in [Markdown](https://en.wikipedia.org/wiki/Markdown) !
+  There are **many** things you can do with Pug and [Semantic
+  UI](https://semantic-ui.com/) and we will cram all of them in this one page so
+  that it will make a nice screenshot. By the way, this paragraph is written in
+  [Markdown](https://en.wikipedia.org/wiki/Markdown) !
 
-  
   
 .ui.container
   .ui.icon.message.yellow.block-center
@@ -27,10 +36,16 @@ h1 {{ title }}
         You can add content to your message explaining why it is important and
         what the reader can do to de-importantize the situation.
 
+
 :markdown
   ##  I am a section title
   
-  Maybe the author should think of more original content for the titles. Anyways, here is a colorful table for you, straight from the Semantic UI examples (yeah that's lazyness). If you are filling up a template with Python, you can use Panda's `dataframe.to_html(classes=['ui', 'celled', 'table'])` to create such tables:
+  Maybe the author should think of more original content for the titles.
+  Anyways, here is a colorful table for you, straight from the Semantic UI
+  examples (yeah that's lazyness). If you are filling up a template with Python,
+  you can use Panda's `dataframe.to_html(classes=['ui', 'celled', 'table'])` to
+  create such tables:
+
 
 table.ui.celled.table
   thead

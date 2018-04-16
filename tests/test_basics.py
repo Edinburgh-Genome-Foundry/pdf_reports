@@ -11,3 +11,6 @@ def test_basics(tmpdir):
     with open(pdf_path, "rb") as f:
         reader = PdfFileReader(f)
         assert reader.numPages == 2
+
+    pdf_data = write_report(html)
+    assert len(pdf_data) > 10000

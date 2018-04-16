@@ -2,6 +2,7 @@ import os
 import weasyprint
 import jinja2
 import tempfile
+from io import BytesIO
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 STYLESHEET = os.path.join(THIS_PATH, 'css', 'style.css')
@@ -28,7 +29,7 @@ def pug_to_html(path=None, string=None, **context):
       (if it contains variables). For instance ``title='My title'``.
 
     """
-    default = {k: v for (k,v) in GLOBALS.items()}
+    default = {k: v for (k, v) in GLOBALS.items()}
     default.update(context)
     context = default
     if string is not None:
@@ -49,7 +50,7 @@ def pug_to_html(path=None, string=None, **context):
     return template.render(context)
 
 
-def write_report(html, target, base_url=None, use_default_styling=True,
+def write_report(html, target=None, base_url=None, use_default_styling=True,
                  extra_stylesheets=()):
     """Write the provided HTML in a PDF file.
 
@@ -58,7 +59,8 @@ def write_report(html, target, base_url=None, use_default_styling=True,
     html
 
     target
-      A PDF file path or file-like object
+      A PDF file path or file-like object, or None for returning the raw bytes
+      of the PDF.
 
     base_url
       The base path from which relative paths in the HTML template start.
@@ -74,4 +76,10 @@ def write_report(html, target, base_url=None, use_default_styling=True,
     """
     weasy_html = weasyprint.HTML(string=html, base_url=base_url)
     stylesheets = use_default_styling * (STYLESHEET,) + extra_stylesheets
-    weasy_html.write_pdf(target, stylesheets=stylesheets)
+    if target is None:
+        with BytesIO() as buffer:
+            write_report("<h1>Bla</h1>", buffer)
+            pdf_data = buffer.getvalue()
+        return pdf_data
+    else:
+        weasy_html.write_pdf(target, stylesheets=stylesheets)
