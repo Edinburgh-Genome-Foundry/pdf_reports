@@ -1,6 +1,8 @@
 import os
 from pdf_reports import pug_to_html, write_report
 import pandas
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from PyPDF2 import PdfFileReader
 
