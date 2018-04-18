@@ -1,4 +1,4 @@
-"""Basic PDF report generation from a JINJA template with pdf_reports.
+"""Basic PDF report generation from a Pug template with pdf_reports.
 
 A HTML page is generated from a template and rendered as a local PDF file.
 """

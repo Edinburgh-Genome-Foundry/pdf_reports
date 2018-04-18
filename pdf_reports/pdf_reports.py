@@ -3,15 +3,23 @@ import weasyprint
 import jinja2
 import tempfile
 from io import BytesIO
+from . import tools
+from functools import lru_cache
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
+SEMANTIC_UI_CSS = os.path.join(THIS_PATH, 'css', 'semantic.min.css')
 STYLESHEET = os.path.join(THIS_PATH, 'css', 'style.css')
 EGF_LOGO_URL = os.path.join(THIS_PATH, 'css', 'egf-logo.svg')
 
 GLOBALS = {
     "egf_logo_url": EGF_LOGO_URL,
-    'list': list
+    'list': list,
+    'pdf_tools': tools
 }
+
+@lru_cache(maxsize=1)
+def get_semantic_ui_CSS():
+    return weasyprint.CSS(filename=SEMANTIC_UI_CSS)
 
 def pug_to_html(path=None, string=None, **context):
     """Convert a Pug template, as file or string, to html.
@@ -57,6 +65,7 @@ def write_report(html, target=None, base_url=None, use_default_styling=True,
     Parameters
     ----------
     html
+      A HTML string
 
     target
       A PDF file path or file-like object, or None for returning the raw bytes
@@ -67,7 +76,7 @@ def write_report(html, target=None, base_url=None, use_default_styling=True,
 
     use_default_styling
       Setting this parameter to False, your PDF will have no styling at all by
-      default.
+      default. This means no Semantic UI, which can speed up the rendering.
 
     extra_stylesheets
       List of paths to other ".css" files used to define new styles or
@@ -75,7 +84,10 @@ def write_report(html, target=None, base_url=None, use_default_styling=True,
 
     """
     weasy_html = weasyprint.HTML(string=html, base_url=base_url)
-    stylesheets = use_default_styling * (STYLESHEET,) + extra_stylesheets
+    if use_default_styling:
+        stylesheets = (get_semantic_ui_CSS(), STYLESHEET,) + extra_stylesheets
+    else:
+        stylesheets = extra_stylesheets
     if target is None:
         with BytesIO() as buffer:
             weasy_html.write_pdf(buffer, stylesheets=stylesheets)

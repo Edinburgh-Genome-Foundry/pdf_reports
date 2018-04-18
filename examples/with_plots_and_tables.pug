@@ -1,0 +1,17 @@
+h1 Example document with plot and table
+
+#sidebar: p I am an example PDF generated with PDF Reports
+
+h3 Our Data
+
+{{ pdf_tools.dataframe_to_html(dataframe) }}
+
+
+h3 Age versus height
+
+center
+  - var figure = dataframe.plot("Age", "Height (cm)")
+  img(src="{{ pdf_tools.figure_data(figure, (6, 4)) }}")
+
+
+<style> h3 {margin-top: 4em;} </style>

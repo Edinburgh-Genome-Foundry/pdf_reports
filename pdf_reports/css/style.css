@@ -1,6 +1,6 @@
 /* @import 'semantic-ui/semantic.min.css'; */
-@import 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css';
-@import 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/icon.min.css';
+/* @import 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css'; */
+/* @import 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/components/icon.min.css'; */
 :root {
   --primary-color: #048a8b;
 }
@@ -95,4 +95,8 @@ hr {
     height: 1px;
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+table thead th {
+  text-align: center !important;
 }
