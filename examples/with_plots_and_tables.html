@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Report with plots and tables &mdash; PDF Reports 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/main.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="PDF Reports 0.1.0 documentation" href="../index.html"/>
+        <link rel="prev" title="Standard example" href="standard_example.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> PDF Reports
+          
+
+          
+            
+            <img src="../_static/html_logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">PDF Reports</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ref.html">PDF Reports Reference manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="standard_example.html">Standard example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Report with plots and tables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#python-code">Python code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pug-template">Pug template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#result">Result</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PDF Reports</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Report with plots and tables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/examples/with_plots_and_tables.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="report-with-plots-and-tables">
+<h1>Report with plots and tables<a class="headerlink" href="#report-with-plots-and-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="python-code">
+<h2>Python code<a class="headerlink" href="#python-code" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;PDF report generation from a Pug template embedding code to generate</span>
+<span class="sd">plots and tables.</span>
+
+<span class="sd">A HTML page is generated from a template and rendered as a local PDF file.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="k">import</span> <span class="n">pug_to_html</span><span class="p">,</span> <span class="n">write_report</span>
+
+<span class="n">dataframe</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">({</span>
+    <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Anna&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Claire&quot;</span><span class="p">,</span> <span class="s2">&quot;Denis&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Age&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">],</span>
+    <span class="s2">&quot;Height (cm)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">140</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">173</span><span class="p">,</span> <span class="mi">185</span><span class="p">]</span>
+<span class="p">},</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Height (cm)&quot;</span><span class="p">])</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="n">pug_to_html</span><span class="p">(</span><span class="s2">&quot;with_plots_and_tables.pug&quot;</span><span class="p">,</span> <span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="p">)</span>
+<span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;with_plots_and_tables.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pug-template">
+<h2>Pug template<a class="headerlink" href="#pug-template" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">h1</span> <span class="n">Example</span> <span class="n">document</span> <span class="k">with</span> <span class="n">plot</span> <span class="ow">and</span> <span class="n">table</span>
+
+<span class="c1">#sidebar: p I am an example PDF generated with PDF Reports</span>
+
+<span class="n">h3</span> <span class="n">Our</span> <span class="n">Data</span>
+
+<span class="p">{{</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">dataframe_to_html</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span> <span class="p">}}</span>
+
+
+<span class="n">h3</span> <span class="n">Age</span> <span class="n">versus</span> <span class="n">height</span>
+
+<span class="n">center</span>
+  <span class="o">-</span> <span class="n">var</span> <span class="n">figure</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Height (cm)&quot;</span><span class="p">)</span>
+  <span class="n">img</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="s2">&quot;{{ pdf_tools.figure_data(figure, (6, 4)) }}&quot;</span><span class="p">)</span>
+
+
+<span class="o">&lt;</span><span class="n">style</span><span class="o">&gt;</span> <span class="n">h3</span> <span class="p">{</span><span class="n">margin</span><span class="o">-</span><span class="n">top</span><span class="p">:</span> <span class="mi">4</span><span class="n">em</span><span class="p">;}</span> <span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="result">
+<h2>Result<a class="headerlink" href="#result" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/with_plots_and_tables.pdf">PDF link</a></p>
+<center>
+<object width=600 height=800 data="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/with_plots_and_tables.pdf" type="application/pdf">
+<iframe width=600 height=800 src="https://docs.google.com/viewer?url=https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/with_plots_and_tables.pdf&embedded=true"></iframe>
+</object>
+</center></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="standard_example.html" class="btn btn-neutral" title="Standard example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Edinburgh Genome Foundry.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

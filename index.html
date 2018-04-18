@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PDF Reports &mdash; PDF Reports 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="PDF Reports 0.1.0 documentation" href="#"/>
+        <link rel="next" title="PDF Reports Reference manual" href="ref.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> PDF Reports
+          
+
+          
+            
+            <img src="_static/html_logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PDF Reports</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">PDF Reports Reference manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/standard_example.html">Standard example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/with_plots_and_tables.html">Report with plots and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">PDF Reports</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>PDF Reports</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <a class="reference internal image-reference" href="_images/title.png"><img alt="[logo]" class="align-center" src="_images/title.png" style="width: 300px;" /></a>
+<div class="section" id="pdf-reports">
+<h1>PDF Reports<a class="headerlink" href="#pdf-reports" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports"><img alt="Travis CI build status" src="https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master" /></a>
+<a class="reference external image-reference" href="https://coveralls.io/github/Edinburgh-Genome-Foundry/pdf_reports?branch=master"><img alt="https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master" src="https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master" /></a>
+<p><em>PDF Reports</em> (complete documentation <a class="reference external" href="https://edinburgh-genome-foundry.github.io/pdf_reports/">here</a>)is a Python library to create nice-looking PDF reports from HTML or <a class="reference external" href="https://pugjs.org">Pug</a> templates. It features modern-looking components (via the <a class="reference external" href="https://semantic-ui.com/">Semantic UI</a> framework) and provides routines to embed tables or plots in the documents.</p>
+<div class="section" id="example-of-use">
+<h2>Example of use<a class="headerlink" href="#example-of-use" title="Permalink to this headline">¶</a></h2>
+<p>Your Pug template file <code class="docutils literal"><span class="pre">template.pug</span></code> may look like this (see a <a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_template.pug">full example</a>):</p>
+<div class="code pug highlight-default"><div class="highlight"><pre><span></span>#sidebar I am the text in the sidebar.
+
+h1 {{ title }}
+
+.ui.piled.segment
+  p Oh hi there ! I am some text in a cool box.
+</pre></div>
+</div>
+<p>Your Python code will be as follows:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="k">import</span> <span class="n">pug_to_html</span><span class="p">,</span> <span class="n">write_report</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">pug_to_html</span><span class="p">(</span><span class="s2">&quot;template.pug&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My report&quot;</span><span class="p">)</span>
+<span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;example.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And your final result may look like this (<a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/example.pdf">PDF file</a>):</p>
+<img alt="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png" src="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png" />
+<p>See also <a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug">this example</a> embedding some python code in the template to
+create figures and tables on the flight.</p>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<p>The core of the library consists of just a few lines of Python, using <a class="reference external" href="https://github.com/akubera/pypugjs">pypugjs</a> to parse Pug templates,  optionally including stylesheets from the Semantic UI CSS framework, and finally calling <a class="reference external" href="http://weasyprint.org/">weasyprint</a> for PDF generation.</p>
+<p>Using Semantic UI implies that (1) the Lato font family should be installed on your machine, otherwise the results will look less good, and (2) the first time that <code class="docutils literal"><span class="pre">write_pdf</span></code> is called in a Python session, if using the default Semantic UI style, the parsing of the CSS will add a 3-second overhead to the function calls (but there will be no overhead for the next calls in that session).</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You can install the library via PIP</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pdf_reports</span>
+</pre></div>
+</div>
+<p>Alternatively, you can unzip the sources in a folder and type</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Note: on some Debian systems you may need to first install <code class="docutils literal"><span class="pre">libffi-dev</span></code> (<code class="docutils literal"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">libffi-dev</span></code>). The package name may be <code class="docutils literal"><span class="pre">libffi-devel</span></code> on some systems.</p>
+</div>
+<div class="section" id="license-mit">
+<h2>License = MIT<a class="headerlink" href="#license-mit" title="Permalink to this headline">¶</a></h2>
+<p>This open-source software project was originally written at the <a class="reference external" href="http://www.genomefoundry.org//">Edinburgh Genome Foundry</a> by <a class="reference external" href="https://github.com/Zulko">Zulko</a>
+and <a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports">released on Github</a> under the MIT licence (¢ Edinburg Genome Foundry). Everyone is welcome to contribute !</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/standard_example.html">Standard example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/with_plots_and_tables.html">Report with plots and tables</a></li>
+</ul>
+</div>
+<a href="https://twitter.com/share" class="twitter-share-button"
+data-text="PDF Reports - A Python library for clean, modern documents" data-size="large" data-hashtags="Python PDF">Tweet
+</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+<iframe src="http://ghbtns.com/github-btn.html?user=Edinburgh-Genome-Foundry&repo=pdf_reports&type=watch&count=true&size=large"
+allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="30px" margin-bottom="30px"></iframe></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ref.html" class="btn btn-neutral float-right" title="PDF Reports Reference manual" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Edinburgh Genome Foundry.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

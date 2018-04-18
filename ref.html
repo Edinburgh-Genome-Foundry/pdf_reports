@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PDF Reports Reference manual &mdash; PDF Reports 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/main.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="PDF Reports 0.1.0 documentation" href="index.html"/>
+        <link rel="next" title="Standard example" href="examples/standard_example.html"/>
+        <link rel="prev" title="PDF Reports" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PDF Reports
+          
+
+          
+            
+            <img src="_static/html_logo.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">PDF Reports</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PDF Reports Reference manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-pdf_reports.pdf_reports">Core functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pdf_reports.tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/standard_example.html">Standard example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/with_plots_and_tables.html">Report with plots and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PDF Reports</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>PDF Reports Reference manual</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/ref.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pdf-reports-reference-manual">
+<span id="reference"></span><h1>PDF Reports Reference manual<a class="headerlink" href="#pdf-reports-reference-manual" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-pdf_reports.pdf_reports">
+<span id="core-functions"></span><h2>Core functions<a class="headerlink" href="#module-pdf_reports.pdf_reports" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="pdf_reports.pdf_reports.pug_to_html">
+<code class="descclassname">pdf_reports.pdf_reports.</code><code class="descname">pug_to_html</code><span class="sig-paren">(</span><em>path=None</em>, <em>string=None</em>, <em>**context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/pdf_reports.html#pug_to_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.pdf_reports.pug_to_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a Pug template, as file or string, to html.</p>
+<dl class="docutils">
+<dt>path</dt>
+<dd>Path to a .pug template file. The <code class="docutils literal"><span class="pre">string</span></code> parameter can be provided
+instead.</dd>
+<dt>string</dt>
+<dd>A string of a Pug template. The <code class="docutils literal"><span class="pre">filepath</span></code> parameter can be provided
+instead.</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>variables</dt>
+<dd>Keyword arguments indicating the variables to use in the Pug template
+(if it contains variables). For instance <code class="docutils literal"><span class="pre">title='My</span> <span class="pre">title'</span></code>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pdf_reports.pdf_reports.write_report">
+<code class="descclassname">pdf_reports.pdf_reports.</code><code class="descname">write_report</code><span class="sig-paren">(</span><em>html</em>, <em>target=None</em>, <em>base_url=None</em>, <em>use_default_styling=True</em>, <em>extra_stylesheets=()</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/pdf_reports.html#write_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.pdf_reports.write_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the provided HTML in a PDF file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>html</strong></p>
+<blockquote>
+<div><p>A HTML string</p>
+</div></blockquote>
+<p><strong>target</strong></p>
+<blockquote>
+<div><p>A PDF file path or file-like object, or None for returning the raw bytes
+of the PDF.</p>
+</div></blockquote>
+<p><strong>base_url</strong></p>
+<blockquote>
+<div><p>The base path from which relative paths in the HTML template start.</p>
+</div></blockquote>
+<p><strong>use_default_styling</strong></p>
+<blockquote>
+<div><p>Setting this parameter to False, your PDF will have no styling at all by
+default. This means no Semantic UI, which can speed up the rendering.</p>
+</div></blockquote>
+<p><strong>extra_stylesheets</strong></p>
+<blockquote class="last">
+<div><p>List of paths to other “.css” files used to define new styles or
+overwrite default styles.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-pdf_reports.tools">
+<span id="tools"></span><h2>Tools<a class="headerlink" href="#module-pdf_reports.tools" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for report generation.</p>
+<p>The module contains in particular routines the creation of tables, plots, etc.
+inside the templates. Functions in this module are available from inside the
+templates under the domain name <code class="docutils literal"><span class="pre">pdf_tools</span></code>. For instance
+<code class="docutils literal"><span class="pre">pdf_tools.dataframe_to_html()</span></code>.</p>
+<dl class="class">
+<dt id="pdf_reports.tools.JupyterPDF">
+<em class="property">class </em><code class="descclassname">pdf_reports.tools.</code><code class="descname">JupyterPDF</code><span class="sig-paren">(</span><em>url</em>, <em>width=600</em>, <em>height=800</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#JupyterPDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.JupyterPDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to display PDFs in a Jupyter / IPython notebook.</p>
+<p>Just write this at the end of a code Cell to get in-browser PDF preview:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="k">import</span> <span class="n">JupyterPDF</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">JupyterPDF</span><span class="p">(</span><span class="s2">&quot;path_to_some.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Credits to StackOverflow’s Jakob: <a class="reference external" href="https://stackoverflow.com/a/19470377">https://stackoverflow.com/a/19470377</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pdf_reports.tools.add_css_class">
+<code class="descclassname">pdf_reports.tools.</code><code class="descname">add_css_class</code><span class="sig-paren">(</span><em>element</em>, <em>cls</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#add_css_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.add_css_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a given class to the given BeautifulSoup HTML element.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pdf_reports.tools.dataframe_to_html">
+<code class="descclassname">pdf_reports.tools.</code><code class="descname">dataframe_to_html</code><span class="sig-paren">(</span><em>dataframe</em>, <em>extra_classes=()</em>, <em>index=False</em>, <em>header=True</em>, <em>escape_html=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#dataframe_to_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.dataframe_to_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a HTML version of a dataframe with Semantic UI CSS style classes.</p>
+<p>By default it applies the following Semantic UI classes:
+‘ui’, ‘compact’, ‘celled’, ‘striped’, ‘table’, ‘groups’</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dataframe</strong></p>
+<blockquote>
+<div><p>The pandas dataframe to convert to PDF</p>
+</div></blockquote>
+<p><strong>extra_classes</strong></p>
+<blockquote>
+<div><p>Classes to add to the default, which are ‘ui’, ‘compact’, ‘celled’,
+‘striped’, ‘table’, ‘groups’, selected to create nicely-formatted
+Semantic UI tables. For instance ‘definition’ can be added to add
+special emphasis on the first column. See Semantic UI documentation.</p>
+</div></blockquote>
+<p><strong>index</strong></p>
+<blockquote>
+<div><p>Whether to display the dataframe’s index.</p>
+</div></blockquote>
+<p><strong>header</strong></p>
+<blockquote>
+<div><p>Whether to display the dataframe’s headers.</p>
+</div></blockquote>
+<p><strong>escape_html</strong></p>
+<blockquote class="last">
+<div><p>Whether the content of the dataframe should be html-escaped. Leave to
+false if your dataframe contains images or any kind of HTML formatting.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pdf_reports.tools.figure_data">
+<code class="descclassname">pdf_reports.tools.</code><code class="descname">figure_data</code><span class="sig-paren">(</span><em>fig</em>, <em>size=None</em>, <em>fmt='png'</em>, <em>bbox_inches='tight'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#figure_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.figure_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a HTML-embeddable string of the figure data.</p>
+<p>The string can be embedded in an image tag as <code class="docutils literal"><span class="pre">&lt;img</span> <span class="pre">src=&quot;{DATA}&quot;/&gt;</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fig</strong></p>
+<blockquote>
+<div><p>A Matplotlib figure. A Matplotlib “ax” can also be provided, at which
+case the whole <code class="docutils literal"><span class="pre">ax.figure</span></code> will be displayed (i.e. all axes in the
+same figure).</p>
+</div></blockquote>
+<p><strong>size</strong></p>
+<blockquote>
+<div><p>Size or resolution (width, height) of the final figure image, in inches.</p>
+</div></blockquote>
+<p><strong>fmt</strong></p>
+<blockquote>
+<div><p>Image format, for instance “png”, “svg”, “jpeg”. SVG is vectorial (non
+pixelated) but sometimes more difficult to work with inside HTML/PDF
+documents.</p>
+</div></blockquote>
+<p><strong>bbox_inches</strong></p>
+<blockquote>
+<div><p>Keeping this option to “tight” will ensure that your plot’s delimitation
+is optimal.</p>
+</div></blockquote>
+<p><strong>**kwargs</strong></p>
+<blockquote class="last">
+<div><p>Any other option of Matplotlib’s figure.savefig() method.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pdf_reports.tools.style_table_rows">
+<code class="descclassname">pdf_reports.tools.</code><code class="descname">style_table_rows</code><span class="sig-paren">(</span><em>table_html</em>, <em>tr_modifier</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#style_table_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.style_table_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new HTML string of the table, with rows modified.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>table_html</strong></p>
+<blockquote>
+<div><p>A string “&lt;table&gt;…&lt;/table&gt;” of an HTML table.</p>
+</div></blockquote>
+<p><strong>tr_modifier</strong></p>
+<blockquote class="last">
+<div><p>A function that takes a BeautifulSoup <code class="docutils literal"><span class="pre">tr</span></code> element as argument
+and changes its attributes inplace. for instance with
+<code class="docutils literal"><span class="pre">tr.text</span> <span class="pre">=</span> <span class="pre">new_text</span></code>, or with the <code class="docutils literal"><span class="pre">add_css_class</span></code> method.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples/standard_example.html" class="btn btn-neutral float-right" title="Standard example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="PDF Reports" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Edinburgh Genome Foundry.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
