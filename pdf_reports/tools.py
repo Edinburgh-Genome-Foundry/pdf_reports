@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import base64
 import pandas
 from io import BytesIO
+import datetime
 
 
 def dataframe_to_html(dataframe, extra_classes=(), index=False, header=True,
@@ -101,6 +102,11 @@ class JupyterPDF(object):
             </center>
         """.format(self=self)
 
+def now(fmt="%Y-%m-%d %H:%M"):
+    now = datetime.datetime.now()
+    if fmt is not None:
+        now = now.strftime(fmt)
+    return now
 
 def figure_data(fig, size=None, fmt='png', bbox_inches='tight', **kwargs):
     """Return a HTML-embeddable string of the figure data.
