@@ -45,6 +45,44 @@ And your final result may look like this (`PDF file <https://github.com/Edinburg
 See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_ embedding some python code in the template to
 create figures and tables on the flight.
 
+Special features
+----------------
+
+Markdown support
+~~~~~~~~~~~~~~~~~~
+
+As a feature of PyPugJS, markdown is supported in the Pug templates.
+
+.. code:: pug
+
+    div
+      :markdown
+        This is some markdown text. Here is a [link](http://example.com/).
+
+        - this is a bullet point list
+        - Second item
+        - Etc.
+
+PDF tools
+~~~~~~~~~~
+
+Some useful functions for generating reports are available from inside the Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()`` or ``pdf_tools.dataframe_to_html()``. Have a look at the docs, or this `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_
+
+JupyterPDF
+~~~~~~~~~~~~
+
+The ``JupyterPDF`` class eases report templates writing by embedding PDF files
+in Jupyter notebooks (using the browser's interactive PDF viewer).
+
+.. code:: python
+
+    from pdf_reports import JupyterPDF
+
+    # Build your PDF
+
+    # At the end of the notebook cell:
+    JupyterPDF("path_to_your.pdf")
+
 Notes
 -----
 
