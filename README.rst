@@ -66,7 +66,7 @@ As a feature of PyPugJS, markdown is supported in the Pug templates.
 PDF tools
 ~~~~~~~~~~
 
-Some useful functions for generating reports are available from inside the Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()`` or ``pdf_tools.dataframe_to_html()``. Have a look at the docs, or this `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_
+Some useful functions for generating reports are available from inside the Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()`` to embed matplotlib images, or ``pdf_tools.dataframe_to_html()`` to turn Pandas dataframes into HTML, and style them nicely with Semantic UI. Have a look at the docs, or this `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_
 
 JupyterPDF
 ~~~~~~~~~~~~
