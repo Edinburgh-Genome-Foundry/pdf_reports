@@ -107,7 +107,7 @@ def write_report(html, target=None, base_url=None, use_default_styling=True,
         stylesheets = (get_semantic_ui_CSS(), STYLESHEET,) + extra_stylesheets
     else:
         stylesheets = extra_stylesheets
-    if target is None:
+    if target in [None, "@memory"]:
         with BytesIO() as buffer:
             weasy_html.write_pdf(buffer, stylesheets=stylesheets)
             pdf_data = buffer.getvalue()
