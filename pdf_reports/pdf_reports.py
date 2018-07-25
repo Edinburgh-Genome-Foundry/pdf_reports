@@ -33,6 +33,7 @@ GLOBALS = {
     "egf_logo_url": EGF_LOGO_URL,
     'list': list,
     'len': len,
+    'enumerate': enumerate,
     'pdf_tools': tools,
 }
 

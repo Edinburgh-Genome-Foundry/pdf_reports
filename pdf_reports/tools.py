@@ -10,6 +10,7 @@ import base64
 import pandas
 from io import BytesIO
 import datetime
+import textwrap
 
 
 def dataframe_to_html(dataframe, extra_classes=(), index=False, header=True,
@@ -155,3 +156,7 @@ def figure_data(fig, size=None, fmt='png', bbox_inches='tight', **kwargs):
         content = base64.b64encode(data)
     result = b"data:image/%s+xml;base64,%s" % (fmt.encode('utf-8'), content)
     return result.decode("utf-8")
+
+
+def wrap(text, col_width):
+    return "\n".join(textwrap.wrap(text, col_width))
