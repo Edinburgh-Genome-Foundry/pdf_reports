@@ -19,6 +19,7 @@ exec(open('pdf_reports/version.py').read())  # loads __version__
 setup(name='pdf_reports',
       version=__version__,
       author='Zulko',
+      url='https://github.com/Edinburgh-Genome-Foundry/pdf_reports'
       description='Create nice-looking PDF reports from HTML content.',
       long_description=open('pypi-readme.rst').read(),
       license='MIT',

@@ -6,12 +6,12 @@ Standard example
 Python code
 ~~~~~~~~~~~~~
 
-.. literalinclude:: ../../examples/example.py
+.. literalinclude:: ../../examples/basic_example/example.py
 
 Pug template
 ~~~~~~~~~~~~~
 
-.. literalinclude:: ../../examples/example_template.pug
+.. literalinclude:: ../../examples/basic_example/example_template.pug
 
 Result
 ~~~~~~~~~

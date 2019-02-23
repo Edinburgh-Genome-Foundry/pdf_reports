@@ -3,7 +3,7 @@ try:
     from weasyprint import HTML, CSS
 except ImportError as err:
     message = """
-        [PDF Reports] ERROR: The Weasyprint library did not load properly !
+        [PDF Reports] ERROR: The Weasyprint library did not load properly!
         You will not be able to generate PDF reports until you fix this issue.
 
         Windows users, this might be useful:
@@ -16,10 +16,16 @@ except ImportError as err:
         raise ImportError(message)
     CSS = HTML
 
-
+try:
+    import sass
+    LIBSASS_AVAILABLE = True
+except ImportError:
+    LIBSASS_AVAILABLE = False
+    sass = None
 
 import jinja2
 import tempfile
+import warnings
 from io import BytesIO
 from . import tools
 from functools import lru_cache
@@ -39,7 +45,9 @@ GLOBALS = {
 
 @lru_cache(maxsize=1)
 def get_semantic_ui_CSS():
-    return CSS(filename=SEMANTIC_UI_CSS)
+    with warnings.catch_warnings():
+        css = CSS(filename=SEMANTIC_UI_CSS)
+    return css
 
 def pug_to_html(path=None, string=None, **context):
     """Convert a Pug template, as file or string, to html.
@@ -105,6 +113,7 @@ def write_report(html, target=None, base_url=None, use_default_styling=True,
     """
     weasy_html = HTML(string=html, base_url=base_url)
     if use_default_styling:
+        extra_stylesheets = tuple(extra_stylesheets)
         stylesheets = (get_semantic_ui_CSS(), STYLESHEET,) + extra_stylesheets
     else:
         stylesheets = extra_stylesheets
@@ -142,7 +151,43 @@ class ReportWriter:
         return write_report(
             html,
             target=target,
-            extra_stylesheets=self.default_stylesheets + extra_stylesheets,
+            extra_stylesheets=list(self.default_stylesheets) +
+                              list(extra_stylesheets),
             base_url=base_url if base_url else self.default_base_url,
             use_default_styling=self.use_default_styling
         )
+
+def preload_stylesheet(path, is_scss='auto'):
+    """Preload a stylesheet as a WeasyPrint CSS object once and for all.
+
+    Returns a weasyprint.CSS object which can be provided as-is in a list of
+    default_stylesheets or extra_stylesheets.
+
+    Preloading stylesheets can save a lot of time for large CSS frameworks
+    that are used several times. It prevents weasyprint from parsing the CSS
+    every time.
+    
+    If the path ends with .scss or .sass and is_scss is set to "auto",
+    is_scss will be set to True.
+
+    If is_scss is true, the file is compiled using python-libsass (
+    which must be installed).
+
+    Note: if you already have a string, directly use ``sass.compile(s)`` to
+    compile the string
+    """
+    if is_scss == 'auto' and isinstance(path, str):
+        is_scss = path.lower().endswith(('.scss', '.sass'))
+    if hasattr(path, 'read'):
+        string = path.read()
+    else:
+        with open(path, 'r') as f:
+            string = f.read()
+    if is_scss:
+        if not LIBSASS_AVAILABLE:
+            raise ImportError(
+                "Cannot read scss files without python-libsass installed. "
+                "Either install the library or provide a CSS file, or set "
+                "is_scss to False")
+        string = sass.compile(string=string)
+    return CSS(string=string)

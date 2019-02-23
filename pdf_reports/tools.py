@@ -151,7 +151,7 @@ def figure_data(fig, size=None, fmt='png', bbox_inches='tight', **kwargs):
         svg_txt = data.decode()
         svg_txt = "\n".join(svg_txt.split("\n")[4:])
         svg_txt = "".join(svg_txt.split("\n"))
-        content = base64.b64encode(svg_txt.encode("ascii"))
+        content = base64.b64encode(svg_txt.encode("utf-8"))
     else:
         content = base64.b64encode(data)
     result = b"data:image/%s+xml;base64,%s" % (fmt.encode('utf-8'), content)

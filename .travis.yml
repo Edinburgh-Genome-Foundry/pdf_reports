@@ -3,7 +3,7 @@ python:
   - "3.6"
 # command to install dependencies
 before_install:
-  - pip install pytest coveralls PyPDF2 pytest-cov matplotlib
+  - pip install pytest coveralls PyPDF2 pytest-cov==2.6 matplotlib libsass
   - pip install -e .
 # command to run tests
 script:

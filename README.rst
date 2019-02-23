@@ -45,8 +45,50 @@ And your final result may look like this (`PDF file <https://github.com/Edinburg
 See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_ embedding some python code in the template to
 create figures and tables on the flight.
 
-Special features
+Other features
 ----------------
+
+The ReportWriter class
+~~~~~~~~~~~~~~~~~~~~~~
+
+Preloading CSS and  SCSS
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+PDF Reports provides a ``preload_stylesheet`` method which can be used to load
+and parse a CSS file. It also works with SCSS files (which will automatically
+be compiled to CSS) but this requires ``libsass`` installed (for instance via
+``pip install libsass``). Here is an example:
+
+.. code:: python
+
+    from pdf_reports import pug_to_html, write_report, preload_stylesheet
+
+    css = preload_stylesheet('style.scss')
+    html = pug_to_html("template.pug", title="My report", my_name='Zulko')
+    write_report(html, "example.pdf", extra_stylesheets=[css])
+
+
+Using a ReportWriter
+~~~~~~~~~~~~~~~~~~~~
+
+The ReportWriter class allows to define default templates, styles, and variable
+names. It can be used to avoid repeating yourself across your application:
+
+.. code:: python
+
+    from pdf_reports import ReportWriter
+
+    # DEFINE A WRITER WITH DEFAULT TEMPLATE AND VALUES
+    report_writer = ReportWriter(
+        default_stylesheets=["style.css"],
+        default_template="template.pug",
+        title="My default title",
+        version="0.1.2"
+    )
+
+    # THEN LATER IN YOUR CODE:
+    html = report_writer.pug_to_html(my_name="Zulko", my_organization="EGF")
+    report_writer.write_report(html, "example_reportwriter.pdf")
 
 Markdown support
 ~~~~~~~~~~~~~~~~~~
@@ -63,10 +105,16 @@ As a feature of PyPugJS, markdown is supported in the Pug templates.
         - Second item
         - Etc.
 
+
 PDF tools
 ~~~~~~~~~~
 
-Some useful functions for generating reports are available from inside the Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()`` to embed matplotlib images, or ``pdf_tools.dataframe_to_html()`` to turn Pandas dataframes into HTML, and style them nicely with Semantic UI. Have a look at the docs, or this `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_
+Some useful functions for generating reports are available from inside the
+Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()``
+to embed matplotlib images, or ``pdf_tools.dataframe_to_html()``
+to turn Pandas dataframes into HTML, and style them nicely with Semantic UI.
+Have a look at the docs, or this
+`example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_
 
 JupyterPDF
 ~~~~~~~~~~~~
