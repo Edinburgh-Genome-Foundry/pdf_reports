@@ -48,9 +48,6 @@ create figures and tables on the flight.
 Other features
 ----------------
 
-The ReportWriter class
-~~~~~~~~~~~~~~~~~~~~~~
-
 Preloading CSS and  SCSS
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
