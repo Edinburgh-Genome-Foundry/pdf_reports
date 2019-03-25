@@ -1,16 +1,24 @@
 import os
 try:
     from weasyprint import HTML, CSS
-except ImportError as err:
-    message = """
-        [PDF Reports] ERROR: The Weasyprint library did not load properly!
-        You will not be able to generate PDF reports until you fix this issue.
+except (ImportError, OSError) as err:
+    message = ("[PDF Reports] ERROR: The Weasyprint library did not load"
+               "properly! You will not be able to generate PDF reports until"
+               "you fix this issue.\n")
 
-        Windows users, this might be useful:
-        http://weasyprint.readthedocs.io/en/stable/install.html#windows
+    if "pango" in str(err):
+        message += ("\nMaybe you haven't installed the Pango dependency? "
+                    "('brew install pango' on Mac, 'apt install libpango' "
+                    "on Ubuntu).\n")
+    if "cairo" in str(err):
+        message += ("\nMaybe you haven't installed the Cairo dependency?\n")
+    
+    message += (
+        "\nIn any other case the weasyprint docs may be able to help:\n\n"
+        "http://weasyprint.readthedocs.io/en/stable/install.html#windows\n\n"
+        "The original import error was %s" % (str(err))
+    )
 
-        The original import error was %s
-    """ % (str(err))
     def HTML(*args, **kwargs):
         """%s""" % message
         raise ImportError(message)
