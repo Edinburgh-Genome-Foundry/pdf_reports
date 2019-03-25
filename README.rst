@@ -151,7 +151,11 @@ Alternatively, you can unzip the sources in a folder and type
 
     sudo python setup.py install
 
-Note: on some Debian systems you may need to first install ``libffi-dev`` (``apt install libffi-dev``). The package name may be ``libffi-devel`` on some systems.
+On some systems, the library import might fail at runtime because of a missing compiled binary (Pango, Cairo). In that case try ``brew install pango`` (Mac) or ``apt install libpango`` (Ubuntu).
+
+Note for Debian users: on some Debian systems you may need to first install ``libffi-dev`` (``apt install libffi-dev``). The package name may be ``libffi-devel`` on some systems.
+
+
 
 License = MIT
 --------------
