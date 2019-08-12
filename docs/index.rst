@@ -22,7 +22,7 @@ PDF Reports
 Example of use
 --------------
 
-Your Pug template file ``template.pug`` may look like this (see a `full example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_template.pug>`_):
+Your Pug template file ``template.pug`` may look like this (see a `full example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/basic_example/example_template.pug>`_):
 
 .. code:: pug
 
@@ -41,11 +41,11 @@ Your Python code will be as follows:
     html = pug_to_html("template.pug", title="My report")
     write_report(html, "example.pdf")
 
-And your final result may look like this (`PDF file <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/example.pdf>`_):
+And your final result may look like this (`PDF file <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/basic_example/example.pdf>`_):
 
 .. image:: https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png
 
-See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_ embedding some python code in the template to
+See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_ embedding some python code in the template to
 create figures and tables on the flight.
 
 Special features
@@ -63,7 +63,7 @@ Special features
         - Second item
         - Etc.
 
-**PDF tools:** Some useful functions for generating reports are available from inside the Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()`` or ``pdf_tools.dataframe_to_html()``. Have a look at the docs, or this `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_
+**PDF tools:** Some useful functions for generating reports are available from inside the Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()`` or ``pdf_tools.dataframe_to_html()``. Have a look at the docs, or this `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_.
 
 **JupyterPDF:** This widget eases report templates writing by embedding PDF files in Jupyter notebooks (using the browser's interactive PDF viewer).
 
