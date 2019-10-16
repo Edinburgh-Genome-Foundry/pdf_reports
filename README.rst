@@ -42,7 +42,11 @@ Your Python code will be as follows:
    html = pug_to_html("template.pug", title="My report")
    write_report(html, "example.pdf")
 
+<<<<<<< HEAD
 And your final result may look like this (`PDF file <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/example_with_plot_and_tables/with_plots_and_tables.pdf>`_):
+=======
+And your final result may look like this (`PDF file <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/basic_example/example.pdf>`_):
+>>>>>>> c96378b57861e6c62b042117e3629fec363712ee
 
 .. image:: https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png
 
@@ -115,7 +119,11 @@ Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()``
 to embed matplotlib images, or ``pdf_tools.dataframe_to_html()``
 to turn Pandas dataframes into HTML, and style them nicely with Semantic UI.
 Have a look at the docs, or this
+<<<<<<< HEAD
 `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_
+=======
+`example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_.
+>>>>>>> c96378b57861e6c62b042117e3629fec363712ee
 
 JupyterPDF
 ~~~~~~~~~~~~
@@ -166,11 +174,21 @@ Alternatively, you can unzip the sources in a folder and type
 
     sudo python setup.py install
 
+<<<<<<< HEAD
 On some systems, the library import might fail at runtime because of a missing compiled binary (Pango, Cairo). In that case try ``brew install pango`` (Mac) or ``apt install libpango`` (Ubuntu).
 
 Note for Debian users: on some Debian systems you may need to first install ``libffi-dev`` (``apt install libffi-dev``). The package name may be ``libffi-devel`` on some systems.
 
 
+=======
+**Note: on some Debian systems** you may need to first install ``libffi-dev`` (``apt install libffi-dev``). The package name may be ``libffi-devel`` on some systems.
+
+**Note: on macOS,** you may need to first install pango with:
+
+```
+brew install pango
+```
+>>>>>>> c96378b57861e6c62b042117e3629fec363712ee
 
 License = MIT
 --------------
