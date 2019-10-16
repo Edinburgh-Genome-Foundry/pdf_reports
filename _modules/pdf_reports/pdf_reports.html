@@ -95,7 +95,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../index.html">PDF Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">PDF_Reports</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
@@ -170,9 +170,41 @@
             
   <h1>Source code for pdf_reports.pdf_reports</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">weasyprint</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">weasyprint</span> <span class="k">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">CSS</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">)</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;[PDF Reports] ERROR: The Weasyprint library did not load&quot;</span>
+               <span class="s2">&quot;properly! You will not be able to generate PDF reports until&quot;</span>
+               <span class="s2">&quot;you fix this issue.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;pango&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maybe you haven&#39;t installed the Pango dependency? &quot;</span>
+                    <span class="s2">&quot;(&#39;brew install pango&#39; on Mac, &#39;apt install libpango&#39; &quot;</span>
+                    <span class="s2">&quot;on Ubuntu).</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;cairo&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">):</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Maybe you haven&#39;t installed the Cairo dependency?</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="n">message</span> <span class="o">+=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">In any other case the weasyprint docs may be able to help:</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;http://weasyprint.readthedocs.io/en/stable/install.html#windows</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;The original import error was </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">HTML</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;%s&quot;&quot;&quot;</span> <span class="o">%</span> <span class="n">message</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">CSS</span> <span class="o">=</span> <span class="n">HTML</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sass</span>
+    <span class="n">LIBSASS_AVAILABLE</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">LIBSASS_AVAILABLE</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">sass</span> <span class="o">=</span> <span class="kc">None</span>
+
 <span class="kn">import</span> <span class="nn">jinja2</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">tools</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">lru_cache</span>
@@ -185,12 +217,17 @@
 <span class="n">GLOBALS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;egf_logo_url&quot;</span><span class="p">:</span> <span class="n">EGF_LOGO_URL</span><span class="p">,</span>
     <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
-    <span class="s1">&#39;pdf_tools&#39;</span><span class="p">:</span> <span class="n">tools</span>
+    <span class="s1">&#39;len&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">,</span>
+    <span class="s1">&#39;zip&#39;</span><span class="p">:</span> <span class="nb">zip</span><span class="p">,</span>
+    <span class="s1">&#39;enumerate&#39;</span><span class="p">:</span> <span class="nb">enumerate</span><span class="p">,</span>
+    <span class="s1">&#39;pdf_tools&#39;</span><span class="p">:</span> <span class="n">tools</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_semantic_ui_CSS</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">weasyprint</span><span class="o">.</span><span class="n">CSS</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">SEMANTIC_UI_CSS</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="n">CSS</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">SEMANTIC_UI_CSS</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">css</span>
 
 <div class="viewcode-block" id="pug_to_html"><a class="viewcode-back" href="../../ref.html#pdf_reports.pdf_reports.pug_to_html">[docs]</a><span class="k">def</span> <span class="nf">pug_to_html</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert a Pug template, as file or string, to html.</span>
@@ -254,18 +291,86 @@
 <span class="sd">      overwrite default styles.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">weasy_html</span> <span class="o">=</span> <span class="n">weasyprint</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">html</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="n">base_url</span><span class="p">)</span>
+    <span class="n">weasy_html</span> <span class="o">=</span> <span class="n">HTML</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">html</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="n">base_url</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">use_default_styling</span><span class="p">:</span>
+        <span class="n">extra_stylesheets</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">extra_stylesheets</span><span class="p">)</span>
         <span class="n">stylesheets</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_semantic_ui_CSS</span><span class="p">(),</span> <span class="n">STYLESHEET</span><span class="p">,)</span> <span class="o">+</span> <span class="n">extra_stylesheets</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">stylesheets</span> <span class="o">=</span> <span class="n">extra_stylesheets</span>
-    <span class="k">if</span> <span class="n">target</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">target</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;@memory&quot;</span><span class="p">]:</span>
         <span class="k">with</span> <span class="n">BytesIO</span><span class="p">()</span> <span class="k">as</span> <span class="n">buffer</span><span class="p">:</span>
             <span class="n">weasy_html</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">stylesheets</span><span class="o">=</span><span class="n">stylesheets</span><span class="p">)</span>
             <span class="n">pdf_data</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">pdf_data</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">weasy_html</span><span class="o">.</span><span class="n">write_pdf</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">stylesheets</span><span class="o">=</span><span class="n">stylesheets</span><span class="p">)</span></div>
+
+<span class="k">class</span> <span class="nc">ReportWriter</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_stylesheets</span><span class="o">=</span><span class="p">(),</span> <span class="n">default_template</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">use_default_styling</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default_base_url</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">default_context</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_template</span> <span class="o">=</span> <span class="n">default_template</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_context</span> <span class="o">=</span> <span class="n">default_context</span> <span class="k">if</span> <span class="n">default_context</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_stylesheets</span> <span class="o">=</span> <span class="n">default_stylesheets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_default_styling</span> <span class="o">=</span> <span class="n">use_default_styling</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_base_url</span> <span class="o">=</span> <span class="n">default_base_url</span>
+
+    <span class="k">def</span> <span class="nf">pug_to_html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;See pdf_reports.pug_to_html&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">string</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_template</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_context</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">context</span><span class="p">:</span>
+                <span class="n">context</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_context</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">pug_to_html</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">string</span><span class="p">,</span> <span class="o">**</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">extra_stylesheets</span><span class="o">=</span><span class="p">(),</span>
+                     <span class="n">base_url</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">write_report</span><span class="p">(</span>
+            <span class="n">html</span><span class="p">,</span>
+            <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span>
+            <span class="n">extra_stylesheets</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_stylesheets</span><span class="p">)</span> <span class="o">+</span>
+                              <span class="nb">list</span><span class="p">(</span><span class="n">extra_stylesheets</span><span class="p">),</span>
+            <span class="n">base_url</span><span class="o">=</span><span class="n">base_url</span> <span class="k">if</span> <span class="n">base_url</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_base_url</span><span class="p">,</span>
+            <span class="n">use_default_styling</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_default_styling</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="preload_stylesheet"><a class="viewcode-back" href="../../ref.html#pdf_reports.pdf_reports.preload_stylesheet">[docs]</a><span class="k">def</span> <span class="nf">preload_stylesheet</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">is_scss</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Preload a stylesheet as a WeasyPrint CSS object once and for all.</span>
+
+<span class="sd">    Returns a weasyprint.CSS object which can be provided as-is in a list of</span>
+<span class="sd">    default_stylesheets or extra_stylesheets.</span>
+
+<span class="sd">    Preloading stylesheets can save a lot of time for large CSS frameworks</span>
+<span class="sd">    that are used several times. It prevents weasyprint from parsing the CSS</span>
+<span class="sd">    every time.</span>
+<span class="sd">    </span>
+<span class="sd">    If the path ends with .scss or .sass and is_scss is set to &quot;auto&quot;,</span>
+<span class="sd">    is_scss will be set to True.</span>
+
+<span class="sd">    If is_scss is true, the file is compiled using python-libsass (</span>
+<span class="sd">    which must be installed).</span>
+
+<span class="sd">    Note: if you already have a string, directly use ``sass.compile(s)`` to</span>
+<span class="sd">    compile the string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">is_scss</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">is_scss</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.scss&#39;</span><span class="p">,</span> <span class="s1">&#39;.sass&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;read&#39;</span><span class="p">):</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">string</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">is_scss</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">LIBSASS_AVAILABLE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+                <span class="s2">&quot;Cannot read scss files without python-libsass installed. &quot;</span>
+                <span class="s2">&quot;Either install the library or provide a CSS file, or set &quot;</span>
+                <span class="s2">&quot;is_scss to False&quot;</span><span class="p">)</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">sass</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">string</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">CSS</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="n">string</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
@@ -312,6 +417,7 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
 
   
 

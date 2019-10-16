@@ -39,7 +39,7 @@
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="PDF Reports 0.1.0 documentation" href="index.html"/>
         <link rel="next" title="Standard example" href="examples/standard_example.html"/>
-        <link rel="prev" title="PDF Reports" href="index.html"/> 
+        <link rel="prev" title="PDF_Reports" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -96,7 +96,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">PDF Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">PDF_Reports</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -178,31 +178,46 @@
 <div class="section" id="module-pdf_reports.pdf_reports">
 <span id="core-functions"></span><h2>Core functions<a class="headerlink" href="#module-pdf_reports.pdf_reports" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
+<dt id="pdf_reports.pdf_reports.preload_stylesheet">
+<code class="sig-prename descclassname">pdf_reports.pdf_reports.</code><code class="sig-name descname">preload_stylesheet</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">is_scss='auto'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/pdf_reports.html#preload_stylesheet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.pdf_reports.preload_stylesheet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preload a stylesheet as a WeasyPrint CSS object once and for all.</p>
+<p>Returns a weasyprint.CSS object which can be provided as-is in a list of
+default_stylesheets or extra_stylesheets.</p>
+<p>Preloading stylesheets can save a lot of time for large CSS frameworks
+that are used several times. It prevents weasyprint from parsing the CSS
+every time.</p>
+<p>If the path ends with .scss or .sass and is_scss is set to “auto”,
+is_scss will be set to True.</p>
+<p>If is_scss is true, the file is compiled using python-libsass (
+which must be installed).</p>
+<p>Note: if you already have a string, directly use <code class="docutils literal notranslate"><span class="pre">sass.compile(s)</span></code> to
+compile the string</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="pdf_reports.pdf_reports.pug_to_html">
-<code class="descclassname">pdf_reports.pdf_reports.</code><code class="descname">pug_to_html</code><span class="sig-paren">(</span><em>path=None</em>, <em>string=None</em>, <em>**context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/pdf_reports.html#pug_to_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.pdf_reports.pug_to_html" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pdf_reports.pdf_reports.</code><code class="sig-name descname">pug_to_html</code><span class="sig-paren">(</span><em class="sig-param">path=None</em>, <em class="sig-param">string=None</em>, <em class="sig-param">**context</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/pdf_reports.html#pug_to_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.pdf_reports.pug_to_html" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a Pug template, as file or string, to html.</p>
-<dl class="docutils">
-<dt>path</dt>
-<dd>Path to a .pug template file. The <code class="docutils literal"><span class="pre">string</span></code> parameter can be provided
-instead.</dd>
-<dt>string</dt>
-<dd>A string of a Pug template. The <code class="docutils literal"><span class="pre">filepath</span></code> parameter can be provided
-instead.</dd>
-<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>variables</dt>
-<dd>Keyword arguments indicating the variables to use in the Pug template
-(if it contains variables). For instance <code class="docutils literal"><span class="pre">title='My</span> <span class="pre">title'</span></code>.</dd>
+<dl class="simple">
+<dt>path</dt><dd><p>Path to a .pug template file. The <code class="docutils literal notranslate"><span class="pre">string</span></code> parameter can be provided
+instead.</p>
+</dd>
+<dt>string</dt><dd><p>A string of a Pug template. The <code class="docutils literal notranslate"><span class="pre">filepath</span></code> parameter can be provided
+instead.</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">**</span></a>variables</dt><dd><p>Keyword arguments indicating the variables to use in the Pug template
+(if it contains variables). For instance <code class="docutils literal notranslate"><span class="pre">title='My</span> <span class="pre">title'</span></code>.</p>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="pdf_reports.pdf_reports.write_report">
-<code class="descclassname">pdf_reports.pdf_reports.</code><code class="descname">write_report</code><span class="sig-paren">(</span><em>html</em>, <em>target=None</em>, <em>base_url=None</em>, <em>use_default_styling=True</em>, <em>extra_stylesheets=()</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/pdf_reports.html#write_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.pdf_reports.write_report" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pdf_reports.pdf_reports.</code><code class="sig-name descname">write_report</code><span class="sig-paren">(</span><em class="sig-param">html</em>, <em class="sig-param">target=None</em>, <em class="sig-param">base_url=None</em>, <em class="sig-param">use_default_styling=True</em>, <em class="sig-param">extra_stylesheets=()</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/pdf_reports.html#write_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.pdf_reports.write_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write the provided HTML in a PDF file.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>html</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>html</strong></p>
 <blockquote>
 <div><p>A HTML string</p>
 </div></blockquote>
@@ -221,14 +236,12 @@ of the PDF.</p>
 default. This means no Semantic UI, which can speed up the rendering.</p>
 </div></blockquote>
 <p><strong>extra_stylesheets</strong></p>
-<blockquote class="last">
+<blockquote>
 <div><p>List of paths to other “.css” files used to define new styles or
 overwrite default styles.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -237,14 +250,14 @@ overwrite default styles.</p>
 <p>Utilities for report generation.</p>
 <p>The module contains in particular routines the creation of tables, plots, etc.
 inside the templates. Functions in this module are available from inside the
-templates under the domain name <code class="docutils literal"><span class="pre">pdf_tools</span></code>. For instance
-<code class="docutils literal"><span class="pre">pdf_tools.dataframe_to_html()</span></code>.</p>
+templates under the domain name <code class="docutils literal notranslate"><span class="pre">pdf_tools</span></code>. For instance
+<code class="docutils literal notranslate"><span class="pre">pdf_tools.dataframe_to_html()</span></code>.</p>
 <dl class="class">
 <dt id="pdf_reports.tools.JupyterPDF">
-<em class="property">class </em><code class="descclassname">pdf_reports.tools.</code><code class="descname">JupyterPDF</code><span class="sig-paren">(</span><em>url</em>, <em>width=600</em>, <em>height=800</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#JupyterPDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.JupyterPDF" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pdf_reports.tools.</code><code class="sig-name descname">JupyterPDF</code><span class="sig-paren">(</span><em class="sig-param">url</em>, <em class="sig-param">width=600</em>, <em class="sig-param">height=800</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#JupyterPDF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.JupyterPDF" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to display PDFs in a Jupyter / IPython notebook.</p>
 <p>Just write this at the end of a code Cell to get in-browser PDF preview:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="k">import</span> <span class="n">JupyterPDF</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="k">import</span> <span class="n">JupyterPDF</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">JupyterPDF</span><span class="p">(</span><span class="s2">&quot;path_to_some.pdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -253,21 +266,19 @@ templates under the domain name <code class="docutils literal"><span class="pre"
 
 <dl class="function">
 <dt id="pdf_reports.tools.add_css_class">
-<code class="descclassname">pdf_reports.tools.</code><code class="descname">add_css_class</code><span class="sig-paren">(</span><em>element</em>, <em>cls</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#add_css_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.add_css_class" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pdf_reports.tools.</code><code class="sig-name descname">add_css_class</code><span class="sig-paren">(</span><em class="sig-param">element</em>, <em class="sig-param">cls</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#add_css_class"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.add_css_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a given class to the given BeautifulSoup HTML element.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pdf_reports.tools.dataframe_to_html">
-<code class="descclassname">pdf_reports.tools.</code><code class="descname">dataframe_to_html</code><span class="sig-paren">(</span><em>dataframe</em>, <em>extra_classes=()</em>, <em>index=False</em>, <em>header=True</em>, <em>escape_html=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#dataframe_to_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.dataframe_to_html" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pdf_reports.tools.</code><code class="sig-name descname">dataframe_to_html</code><span class="sig-paren">(</span><em class="sig-param">dataframe</em>, <em class="sig-param">extra_classes=()</em>, <em class="sig-param">index=False</em>, <em class="sig-param">header=True</em>, <em class="sig-param">use_default_classes=True</em>, <em class="sig-param">escape_html=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#dataframe_to_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.dataframe_to_html" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a HTML version of a dataframe with Semantic UI CSS style classes.</p>
 <p>By default it applies the following Semantic UI classes:
 ‘ui’, ‘compact’, ‘celled’, ‘striped’, ‘table’, ‘groups’</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dataframe</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataframe</strong></p>
 <blockquote>
 <div><p>The pandas dataframe to convert to PDF</p>
 </div></blockquote>
@@ -287,29 +298,25 @@ special emphasis on the first column. See Semantic UI documentation.</p>
 <div><p>Whether to display the dataframe’s headers.</p>
 </div></blockquote>
 <p><strong>escape_html</strong></p>
-<blockquote class="last">
+<blockquote>
 <div><p>Whether the content of the dataframe should be html-escaped. Leave to
 false if your dataframe contains images or any kind of HTML formatting.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="pdf_reports.tools.figure_data">
-<code class="descclassname">pdf_reports.tools.</code><code class="descname">figure_data</code><span class="sig-paren">(</span><em>fig</em>, <em>size=None</em>, <em>fmt='png'</em>, <em>bbox_inches='tight'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#figure_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.figure_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pdf_reports.tools.</code><code class="sig-name descname">figure_data</code><span class="sig-paren">(</span><em class="sig-param">fig</em>, <em class="sig-param">size=None</em>, <em class="sig-param">fmt='png'</em>, <em class="sig-param">bbox_inches='tight'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#figure_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.figure_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a HTML-embeddable string of the figure data.</p>
-<p>The string can be embedded in an image tag as <code class="docutils literal"><span class="pre">&lt;img</span> <span class="pre">src=&quot;{DATA}&quot;/&gt;</span></code>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fig</strong></p>
+<p>The string can be embedded in an image tag as <code class="docutils literal notranslate"><span class="pre">&lt;img</span> <span class="pre">src=&quot;{DATA}&quot;/&gt;</span></code>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fig</strong></p>
 <blockquote>
 <div><p>A Matplotlib figure. A Matplotlib “ax” can also be provided, at which
-case the whole <code class="docutils literal"><span class="pre">ax.figure</span></code> will be displayed (i.e. all axes in the
+case the whole <code class="docutils literal notranslate"><span class="pre">ax.figure</span></code> will be displayed (i.e. all axes in the
 same figure).</p>
 </div></blockquote>
 <p><strong>size</strong></p>
@@ -328,37 +335,31 @@ documents.</p>
 is optimal.</p>
 </div></blockquote>
 <p><strong>**kwargs</strong></p>
-<blockquote class="last">
+<blockquote>
 <div><p>Any other option of Matplotlib’s figure.savefig() method.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="pdf_reports.tools.style_table_rows">
-<code class="descclassname">pdf_reports.tools.</code><code class="descname">style_table_rows</code><span class="sig-paren">(</span><em>table_html</em>, <em>tr_modifier</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#style_table_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.style_table_rows" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pdf_reports.tools.</code><code class="sig-name descname">style_table_rows</code><span class="sig-paren">(</span><em class="sig-param">table_html</em>, <em class="sig-param">tr_modifier</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pdf_reports/tools.html#style_table_rows"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pdf_reports.tools.style_table_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a new HTML string of the table, with rows modified.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>table_html</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>table_html</strong></p>
 <blockquote>
 <div><p>A string “&lt;table&gt;…&lt;/table&gt;” of an HTML table.</p>
 </div></blockquote>
 <p><strong>tr_modifier</strong></p>
-<blockquote class="last">
-<div><p>A function that takes a BeautifulSoup <code class="docutils literal"><span class="pre">tr</span></code> element as argument
+<blockquote>
+<div><p>A function that takes a BeautifulSoup <code class="docutils literal notranslate"><span class="pre">tr</span></code> element as argument
 and changes its attributes inplace. for instance with
-<code class="docutils literal"><span class="pre">tr.text</span> <span class="pre">=</span> <span class="pre">new_text</span></code>, or with the <code class="docutils literal"><span class="pre">add_css_class</span></code> method.</p>
+<code class="docutils literal notranslate"><span class="pre">tr.text</span> <span class="pre">=</span> <span class="pre">new_text</span></code>, or with the <code class="docutils literal notranslate"><span class="pre">add_css_class</span></code> method.</p>
 </div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -377,7 +378,7 @@ and changes its attributes inplace. for instance with
         <a href="examples/standard_example.html" class="btn btn-neutral float-right" title="Standard example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="PDF Reports" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="PDF_Reports" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -418,6 +419,7 @@ and changes its attributes inplace. for instance with
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
 
   
 

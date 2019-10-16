@@ -95,7 +95,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../index.html">PDF Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">PDF_Reports</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
@@ -180,10 +180,18 @@
 <span class="kn">import</span> <span class="nn">base64</span>
 <span class="kn">import</span> <span class="nn">pandas</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
 
 
-<div class="viewcode-block" id="dataframe_to_html"><a class="viewcode-back" href="../../ref.html#pdf_reports.tools.dataframe_to_html">[docs]</a><span class="k">def</span> <span class="nf">dataframe_to_html</span><span class="p">(</span><span class="n">dataframe</span><span class="p">,</span> <span class="n">extra_classes</span><span class="o">=</span><span class="p">(),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                      <span class="n">escape_html</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="dataframe_to_html"><a class="viewcode-back" href="../../ref.html#pdf_reports.tools.dataframe_to_html">[docs]</a><span class="k">def</span> <span class="nf">dataframe_to_html</span><span class="p">(</span>
+    <span class="n">dataframe</span><span class="p">,</span>
+    <span class="n">extra_classes</span><span class="o">=</span><span class="p">(),</span>
+    <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_default_classes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">escape_html</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a HTML version of a dataframe with Semantic UI CSS style classes.</span>
 
 <span class="sd">    By default it applies the following Semantic UI classes:</span>
@@ -211,14 +219,23 @@
 <span class="sd">      Whether the content of the dataframe should be html-escaped. Leave to</span>
 <span class="sd">      false if your dataframe contains images or any kind of HTML formatting.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">default_classes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;ui&#39;</span><span class="p">,</span> <span class="s1">&#39;compact&#39;</span><span class="p">,</span> <span class="s1">&#39;celled&#39;</span><span class="p">,</span> <span class="s1">&#39;striped&#39;</span><span class="p">,</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="s1">&#39;groups&#39;</span><span class="p">)</span>
-    <span class="n">classes</span> <span class="o">=</span> <span class="n">default_classes</span> <span class="o">+</span> <span class="n">extra_classes</span>
-    <span class="n">current_colwidth</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">)</span>
-    <span class="n">pandas</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span>
-                               <span class="n">escape</span><span class="o">=</span><span class="n">escape_html</span><span class="p">)</span>
-    <span class="n">pandas</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="n">current_colwidth</span><span class="p">)</span>
+    <span class="n">default_classes</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="k">if</span> <span class="n">use_default_classes</span><span class="p">:</span>
+        <span class="n">default_classes</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;ui&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;compact&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;celled&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;striped&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;table&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;groups&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="n">default_classes</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">extra_classes</span><span class="p">)</span>
+    <span class="n">current_colwidth</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">)</span>
+    <span class="n">pandas</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
+        <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="n">escape_html</span>
+    <span class="p">)</span>
+    <span class="n">pandas</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="n">current_colwidth</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
@@ -259,6 +276,7 @@
 
 <span class="sd">    Credits to StackOverflow&#39;s Jakob: https://stackoverflow.com/a/19470377</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
@@ -270,10 +288,19 @@
 <span class="s2">                &lt;iframe src=</span><span class="si">{self.url}</span><span class="s2"> width=</span><span class="si">{self.width}</span><span class="s2"> height=</span><span class="si">{self.height}</span><span class="s2">&gt;</span>
 <span class="s2">                &lt;/iframe&gt;</span>
 <span class="s2">            &lt;/center&gt;</span>
-<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span></div>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">=</span><span class="bp">self</span>
+        <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="figure_data"><a class="viewcode-back" href="../../ref.html#pdf_reports.tools.figure_data">[docs]</a><span class="k">def</span> <span class="nf">figure_data</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">now</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">):</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">now</span>
+
+
+<div class="viewcode-block" id="figure_data"><a class="viewcode-back" href="../../ref.html#pdf_reports.tools.figure_data">[docs]</a><span class="k">def</span> <span class="nf">figure_data</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a HTML-embeddable string of the figure data.</span>
 
 <span class="sd">    The string can be embedded in an image tag as ``&lt;img src=&quot;{DATA}&quot;/&gt;``.</span>
@@ -315,11 +342,15 @@
         <span class="n">svg_txt</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
         <span class="n">svg_txt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">svg_txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">4</span><span class="p">:])</span>
         <span class="n">svg_txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">svg_txt</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
-        <span class="n">content</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">svg_txt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">))</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">svg_txt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;data:image/</span><span class="si">%s</span><span class="s2">+xml;base64,</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">content</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;data:image/</span><span class="si">%s</span><span class="s2">+xml;base64,</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">content</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">col_width</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">col_width</span><span class="p">))</span>
 </pre></div>
 
            </div>
@@ -366,6 +397,7 @@
       <script type="text/javascript" src="../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/language_data.js"></script>
 
   
 

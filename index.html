@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PDF Reports &mdash; PDF Reports 0.1.0 documentation</title>
+  <title>PDF_Reports &mdash; PDF Reports 0.1.0 documentation</title>
   
 
   
@@ -95,7 +95,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">PDF Reports</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PDF_Reports</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
@@ -149,7 +149,7 @@
     
       <li><a href="#">Docs</a> &raquo;</li>
         
-      <li>PDF Reports</li>
+      <li>PDF_Reports</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -168,50 +168,137 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <a class="reference internal image-reference" href="_images/title.png"><img alt="[logo]" class="align-center" src="_images/title.png" style="width: 300px;" /></a>
-<div class="section" id="pdf-reports">
-<h1>PDF Reports<a class="headerlink" href="#pdf-reports" title="Permalink to this headline">¶</a></h1>
+  <p align="center">
+<img alt="DNA Chisel Logo" title="DNA Chisel" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/pdf_reports/master/docs/_static/images/title.png" width="350">
+<br /><br />
+</p><div class="section" id="pdf-reports">
+<h1>PDF_Reports<a class="headerlink" href="#pdf-reports" title="Permalink to this headline">¶</a></h1>
 <a class="reference external image-reference" href="https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports"><img alt="Travis CI build status" src="https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master" /></a>
 <a class="reference external image-reference" href="https://coveralls.io/github/Edinburgh-Genome-Foundry/pdf_reports?branch=master"><img alt="https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master" src="https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master" /></a>
-<p><em>PDF Reports</em> (complete documentation <a class="reference external" href="https://edinburgh-genome-foundry.github.io/pdf_reports/">here</a>)is a Python library to create nice-looking PDF reports from HTML or <a class="reference external" href="https://pugjs.org">Pug</a> templates. It features modern-looking components (via the <a class="reference external" href="https://semantic-ui.com/">Semantic UI</a> framework) and provides routines to embed tables or plots in the documents.</p>
+<p><em>PDF Reports</em> (complete documentation <a class="reference external" href="https://edinburgh-genome-foundry.github.io/pdf_reports/">here</a>) is a Python library to create nice-looking PDF reports from HTML or <a class="reference external" href="https://pugjs.org">Pug</a> templates. It features modern-looking components (via the <a class="reference external" href="https://semantic-ui.com/">Semantic UI</a> framework) and provides routines to embed tables or plots in the documents.</p>
 <div class="section" id="example-of-use">
 <h2>Example of use<a class="headerlink" href="#example-of-use" title="Permalink to this headline">¶</a></h2>
-<p>Your Pug template file <code class="docutils literal"><span class="pre">template.pug</span></code> may look like this (see a <a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_template.pug">full example</a>):</p>
-<div class="code pug highlight-default"><div class="highlight"><pre><span></span>#sidebar I am the text in the sidebar.
+<p>Your Pug template file <code class="docutils literal notranslate"><span class="pre">template.pug</span></code> may look like this (see a <a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/basic_example/example_template.pug">full example</a>):</p>
+<div class="highlight-pug notranslate"><div class="highlight"><pre><span></span><span class="nf">#sidebar</span> I am the text in the sidebar.
 
-h1 {{ title }}
+<span class="nt">h1</span> {{ title }}
 
-.ui.piled.segment
-  p Oh hi there ! I am some text in a cool box.
+<span class="nc">.ui.piled.segment</span>
+  <span class="nt">p</span> Oh hi there ! I am some text in a cool box.
 </pre></div>
 </div>
 <p>Your Python code will be as follows:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="k">import</span> <span class="n">pug_to_html</span><span class="p">,</span> <span class="n">write_report</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="kn">import</span> <span class="n">pug_to_html</span><span class="p">,</span> <span class="n">write_report</span>
 <span class="n">html</span> <span class="o">=</span> <span class="n">pug_to_html</span><span class="p">(</span><span class="s2">&quot;template.pug&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My report&quot;</span><span class="p">)</span>
 <span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;example.pdf&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>And your final result may look like this (<a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/example.pdf">PDF file</a>):</p>
+<p>And your final result may look like this (<a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/basic_example/example.pdf">PDF file</a>):</p>
 <img alt="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png" src="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png" />
-<p>See also <a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug">this example</a> embedding some python code in the template to
+<p>See also <a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug">this example</a> embedding some python code in the template to
 create figures and tables on the flight.</p>
+</div>
+<div class="section" id="other-features">
+<h2>Other features<a class="headerlink" href="#other-features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="preloading-css-and-scss">
+<h3>Preloading CSS and  SCSS<a class="headerlink" href="#preloading-css-and-scss" title="Permalink to this headline">¶</a></h3>
+<p>PDF Reports provides a <code class="docutils literal notranslate"><span class="pre">preload_stylesheet</span></code> method which can be used to load
+and parse a CSS file. It also works with SCSS files (which will automatically
+be compiled to CSS) but this requires <code class="docutils literal notranslate"><span class="pre">libsass</span></code> installed (for instance via
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">libsass</span></code>). Here is an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="kn">import</span> <span class="n">pug_to_html</span><span class="p">,</span> <span class="n">write_report</span><span class="p">,</span> <span class="n">preload_stylesheet</span>
+
+<span class="n">css</span> <span class="o">=</span> <span class="n">preload_stylesheet</span><span class="p">(</span><span class="s1">&#39;style.scss&#39;</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">pug_to_html</span><span class="p">(</span><span class="s2">&quot;template.pug&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My report&quot;</span><span class="p">,</span> <span class="n">my_name</span><span class="o">=</span><span class="s1">&#39;Zulko&#39;</span><span class="p">)</span>
+<span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;example.pdf&quot;</span><span class="p">,</span> <span class="n">extra_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="n">css</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-a-reportwriter">
+<h3>Using a ReportWriter<a class="headerlink" href="#using-a-reportwriter" title="Permalink to this headline">¶</a></h3>
+<p>The ReportWriter class allows to define default templates, styles, and variable
+names. It can be used to avoid repeating yourself across your application:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="kn">import</span> <span class="n">ReportWriter</span>
+
+<span class="c1"># DEFINE A WRITER WITH DEFAULT TEMPLATE AND VALUES</span>
+<span class="n">report_writer</span> <span class="o">=</span> <span class="n">ReportWriter</span><span class="p">(</span>
+    <span class="n">default_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;style.css&quot;</span><span class="p">],</span>
+    <span class="n">default_template</span><span class="o">=</span><span class="s2">&quot;template.pug&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My default title&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1.2&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># THEN LATER IN YOUR CODE:</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">report_writer</span><span class="o">.</span><span class="n">pug_to_html</span><span class="p">(</span><span class="n">my_name</span><span class="o">=</span><span class="s2">&quot;Zulko&quot;</span><span class="p">,</span> <span class="n">my_organization</span><span class="o">=</span><span class="s2">&quot;EGF&quot;</span><span class="p">)</span>
+<span class="n">report_writer</span><span class="o">.</span><span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;example_reportwriter.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="markdown-support">
+<h3>Markdown support<a class="headerlink" href="#markdown-support" title="Permalink to this headline">¶</a></h3>
+<p>As a feature of PyPugJS, markdown is supported in the Pug templates.</p>
+<div class="highlight-pug notranslate"><div class="highlight"><pre><span></span><span class="nt">div</span>
+  <span class="nd">:markdown</span>
+    <span class="nd">This is some markdown text. Here is a [link](http://example.com/).</span>
+
+    <span class="nd">- this is a bullet point list</span>
+    <span class="nd">- Second item</span>
+    <span class="nd">- Etc.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pdf-tools">
+<h3>PDF tools<a class="headerlink" href="#pdf-tools" title="Permalink to this headline">¶</a></h3>
+<p>Some useful functions for generating reports are available from inside the
+Pug templates under <code class="docutils literal notranslate"><span class="pre">pdf_tools</span></code>. For instance, <code class="docutils literal notranslate"><span class="pre">pdf_tools.figure_data()</span></code>
+to embed matplotlib images, or <code class="docutils literal notranslate"><span class="pre">pdf_tools.dataframe_to_html()</span></code>
+to turn Pandas dataframes into HTML, and style them nicely with Semantic UI.
+Have a look at the docs, or this
+<a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug">example</a></p>
+</div>
+<div class="section" id="jupyterpdf">
+<h3>JupyterPDF<a class="headerlink" href="#jupyterpdf" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">JupyterPDF</span></code> class eases report templates writing by embedding PDF files
+in Jupyter notebooks (using the browser’s interactive PDF viewer).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="kn">import</span> <span class="n">JupyterPDF</span>
+
+<span class="c1"># Build your PDF</span>
+
+<span class="c1"># At the end of the notebook cell:</span>
+<span class="n">JupyterPDF</span><span class="p">(</span><span class="s2">&quot;path_to_your.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
-<p>The core of the library consists of just a few lines of Python, using <a class="reference external" href="https://github.com/akubera/pypugjs">pypugjs</a> to parse Pug templates,  optionally including stylesheets from the Semantic UI CSS framework, and finally calling <a class="reference external" href="http://weasyprint.org/">weasyprint</a> for PDF generation.</p>
-<p>Using Semantic UI implies that (1) the Lato font family should be installed on your machine, otherwise the results will look less good, and (2) the first time that <code class="docutils literal"><span class="pre">write_pdf</span></code> is called in a Python session, if using the default Semantic UI style, the parsing of the CSS will add a 3-second overhead to the function calls (but there will be no overhead for the next calls in that session).</p>
+<p>The core of the library consists of just a few lines of Python, using <a class="reference external" href="https://github.com/akubera/pypugjs">pypugjs</a> to parse Pug templates,  optionally including stylesheets from the Semantic UI CSS framework, and finally calling <a class="reference external" href="http://weasyprint.org/">weasyprint</a> for PDF generation. Please refer to the Weasyprint documentation for the customization of templates. For instance, to customize the page margins and numbering the Weasyprint way, add this to your SCSS code:</p>
+<div class="highlight-scss notranslate"><div class="highlight"><pre><span></span><span class="k">@page</span> <span class="p">{</span>
+    <span class="nt">margin</span><span class="nd">:</span> <span class="nt">1cm</span> <span class="nt">0</span> <span class="nt">2cm</span> <span class="nt">0cm</span><span class="o">;</span>
+    <span class="o">@</span><span class="nt">bottom-center</span> <span class="p">{</span>
+        <span class="nt">content</span><span class="nd">:</span> <span class="s2">&quot;Page &quot;</span> <span class="nt">counter</span><span class="o">(</span><span class="nt">page</span><span class="o">)</span> <span class="s2">&quot; / &quot;</span> <span class="nt">counter</span><span class="o">(</span><span class="nt">pages</span><span class="o">);</span>
+        <span class="nt">font-family</span><span class="nd">:</span> <span class="s1">&#39;</span><span class="s2">Lato&#39;</span><span class="o">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using Semantic UI implies that (1) the Lato font family should be installed on your machine, otherwise the results will look less good, and (2) the first time that <code class="docutils literal notranslate"><span class="pre">write_pdf</span></code> is called in a Python session, if using the default Semantic UI style, the parsing of the CSS will add a 3-second overhead to the function calls (but there will be no overhead for the next calls in that session).</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>You can install the library via PIP</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pdf_reports</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pdf_reports</span>
 </pre></div>
 </div>
 <p>Alternatively, you can unzip the sources in a folder and type</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
 </pre></div>
 </div>
-<p>Note: on some Debian systems you may need to first install <code class="docutils literal"><span class="pre">libffi-dev</span></code> (<code class="docutils literal"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">libffi-dev</span></code>). The package name may be <code class="docutils literal"><span class="pre">libffi-devel</span></code> on some systems.</p>
+<p><strong>Note: on some Debian systems</strong> you may need to first install <code class="docutils literal notranslate"><span class="pre">libffi-dev</span></code> (<code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">libffi-dev</span></code>). The package name may be <code class="docutils literal notranslate"><span class="pre">libffi-devel</span></code> on some systems.</p>
+<p><strong>Note: on macOS,</strong> you may need to first install pango with:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">brew</span> <span class="pre">install</span> <span class="pre">pango</span>
+<span class="pre">`</span></code></p>
 </div>
 <div class="section" id="license-mit">
 <h2>License = MIT<a class="headerlink" href="#license-mit" title="Permalink to this headline">¶</a></h2>
@@ -291,6 +378,7 @@ allowtransparency="true" frameborder="0" scrolling="0" width="152px" height="30p
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
 
   
 

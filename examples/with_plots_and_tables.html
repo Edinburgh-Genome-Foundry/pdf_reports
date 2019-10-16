@@ -95,7 +95,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">PDF Reports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">PDF_Reports</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
@@ -177,48 +177,9 @@
 <h1>Report with plots and tables<a class="headerlink" href="#report-with-plots-and-tables" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="python-code">
 <h2>Python code<a class="headerlink" href="#python-code" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;PDF report generation from a Pug template embedding code to generate</span>
-<span class="sd">plots and tables.</span>
-
-<span class="sd">A HTML page is generated from a template and rendered as a local PDF file.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">pdf_reports</span> <span class="k">import</span> <span class="n">pug_to_html</span><span class="p">,</span> <span class="n">write_report</span>
-
-<span class="n">dataframe</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">({</span>
-    <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Anna&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Claire&quot;</span><span class="p">,</span> <span class="s2">&quot;Denis&quot;</span><span class="p">],</span>
-    <span class="s2">&quot;Age&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">],</span>
-    <span class="s2">&quot;Height (cm)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">140</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">173</span><span class="p">,</span> <span class="mi">185</span><span class="p">]</span>
-<span class="p">},</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Height (cm)&quot;</span><span class="p">])</span>
-
-<span class="n">html</span> <span class="o">=</span> <span class="n">pug_to_html</span><span class="p">(</span><span class="s2">&quot;with_plots_and_tables.pug&quot;</span><span class="p">,</span> <span class="n">dataframe</span><span class="o">=</span><span class="n">dataframe</span><span class="p">)</span>
-<span class="n">write_report</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;with_plots_and_tables.pdf&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="pug-template">
 <h2>Pug template<a class="headerlink" href="#pug-template" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">h1</span> <span class="n">Example</span> <span class="n">document</span> <span class="k">with</span> <span class="n">plot</span> <span class="ow">and</span> <span class="n">table</span>
-
-<span class="c1">#sidebar: p I am an example PDF generated with PDF Reports</span>
-
-<span class="n">h3</span> <span class="n">Our</span> <span class="n">Data</span>
-
-<span class="p">{{</span> <span class="n">pdf_tools</span><span class="o">.</span><span class="n">dataframe_to_html</span><span class="p">(</span><span class="n">dataframe</span><span class="p">)</span> <span class="p">}}</span>
-
-
-<span class="n">h3</span> <span class="n">Age</span> <span class="n">versus</span> <span class="n">height</span>
-
-<span class="n">center</span>
-  <span class="o">-</span> <span class="n">var</span> <span class="n">figure</span> <span class="o">=</span> <span class="n">dataframe</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Height (cm)&quot;</span><span class="p">)</span>
-  <span class="n">img</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="s2">&quot;{{ pdf_tools.figure_data(figure, (6, 4)) }}&quot;</span><span class="p">)</span>
-
-
-<span class="o">&lt;</span><span class="n">style</span><span class="o">&gt;</span> <span class="n">h3</span> <span class="p">{</span><span class="n">margin</span><span class="o">-</span><span class="n">top</span><span class="p">:</span> <span class="mi">4</span><span class="n">em</span><span class="p">;}</span> <span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="result">
 <h2>Result<a class="headerlink" href="#result" title="Permalink to this headline">¶</a></h2>
@@ -282,6 +243,7 @@
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
 
   
 
