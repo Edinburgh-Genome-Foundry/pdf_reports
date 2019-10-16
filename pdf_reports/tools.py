@@ -13,8 +13,14 @@ import datetime
 import textwrap
 
 
-def dataframe_to_html(dataframe, extra_classes=(), index=False, header=True,
-                      escape_html=False):
+def dataframe_to_html(
+    dataframe,
+    extra_classes=(),
+    index=False,
+    header=True,
+    use_default_classes=True,
+    escape_html=False,
+):
     """Return a HTML version of a dataframe with Semantic UI CSS style classes.
 
     By default it applies the following Semantic UI classes:
@@ -42,14 +48,23 @@ def dataframe_to_html(dataframe, extra_classes=(), index=False, header=True,
       Whether the content of the dataframe should be html-escaped. Leave to
       false if your dataframe contains images or any kind of HTML formatting.
     """
-
-    default_classes = ('ui', 'compact', 'celled', 'striped', 'table', 'groups')
-    classes = default_classes + extra_classes
-    current_colwidth = pandas.get_option('display.max_colwidth')
-    pandas.set_option('display.max_colwidth', -1)
-    result = dataframe.to_html(classes=classes, index=index, header=header,
-                               escape=escape_html)
-    pandas.set_option('display.max_colwidth', current_colwidth)
+    default_classes = ()
+    if use_default_classes:
+        default_classes = (
+            "ui",
+            "compact",
+            "celled",
+            "striped",
+            "table",
+            "groups",
+        )
+    classes = default_classes + tuple(extra_classes)
+    current_colwidth = pandas.get_option("display.max_colwidth")
+    pandas.set_option("display.max_colwidth", -1)
+    result = dataframe.to_html(
+        classes=classes, index=index, header=header, escape=escape_html
+    )
+    pandas.set_option("display.max_colwidth", current_colwidth)
     return result
 
 
@@ -90,6 +105,7 @@ class JupyterPDF(object):
 
     Credits to StackOverflow's Jakob: https://stackoverflow.com/a/19470377
     """
+
     def __init__(self, url, width=600, height=800):
         self.url = url
         self.width = width
@@ -101,7 +117,10 @@ class JupyterPDF(object):
                 <iframe src={self.url} width={self.width} height={self.height}>
                 </iframe>
             </center>
-        """.format(self=self)
+        """.format(
+            self=self
+        )
+
 
 def now(fmt="%Y-%m-%d %H:%M"):
     now = datetime.datetime.now()
@@ -109,7 +128,8 @@ def now(fmt="%Y-%m-%d %H:%M"):
         now = now.strftime(fmt)
     return now
 
-def figure_data(fig, size=None, fmt='png', bbox_inches='tight', **kwargs):
+
+def figure_data(fig, size=None, fmt="png", bbox_inches="tight", **kwargs):
     """Return a HTML-embeddable string of the figure data.
 
     The string can be embedded in an image tag as ``<img src="{DATA}"/>``.
@@ -154,7 +174,7 @@ def figure_data(fig, size=None, fmt='png', bbox_inches='tight', **kwargs):
         content = base64.b64encode(svg_txt.encode("utf-8"))
     else:
         content = base64.b64encode(data)
-    result = b"data:image/%s+xml;base64,%s" % (fmt.encode('utf-8'), content)
+    result = b"data:image/%s+xml;base64,%s" % (fmt.encode("utf-8"), content)
     return result.decode("utf-8")
 
 

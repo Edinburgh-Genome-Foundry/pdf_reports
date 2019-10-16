@@ -5,6 +5,9 @@
     <br /><br />
     </p>
 
+PDF_Reports
+===========
+
 .. image:: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master
    :target: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports
    :alt: Travis CI build status
@@ -13,13 +16,14 @@
    :target: https://coveralls.io/github/Edinburgh-Genome-Foundry/pdf_reports?branch=master
 
 
+
 *PDF Reports* (complete documentation `here <https://edinburgh-genome-foundry.github.io/pdf_reports/>`_) is a Python library to create nice-looking PDF reports from HTML or `Pug <https://pugjs.org>`_ templates. It features modern-looking components (via the `Semantic UI <https://semantic-ui.com/>`_ framework) and provides routines to embed tables or plots in the documents.
 
 
 Example of use
 --------------
 
-Your Pug template file ``template.pug`` may look like this (see a `full example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_template.pug>`_):
+Your Pug template file ``template.pug`` may look like this (see a `full example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/basic_example/example_template.pug>`_):
 
 .. code:: pug
 
@@ -38,11 +42,11 @@ Your Python code will be as follows:
    html = pug_to_html("template.pug", title="My report")
    write_report(html, "example.pdf")
 
-And your final result may look like this (`PDF file <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/example.pdf>`_):
+And your final result may look like this (`PDF file <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/examples/example_with_plot_and_tables/with_plots_and_tables.pdf>`_):
 
 .. image:: https://github.com/Edinburgh-Genome-Foundry/pdf_reports/raw/master/screenshot.png
 
-See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_ embedding some python code in the template to
+See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_ embedding some python code in the template to
 create figures and tables on the flight.
 
 Other features
@@ -111,7 +115,7 @@ Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()``
 to embed matplotlib images, or ``pdf_tools.dataframe_to_html()``
 to turn Pandas dataframes into HTML, and style them nicely with Semantic UI.
 Have a look at the docs, or this
-`example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/with_plots_and_tables.pug>`_
+`example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_
 
 JupyterPDF
 ~~~~~~~~~~~~
@@ -131,7 +135,18 @@ in Jupyter notebooks (using the browser's interactive PDF viewer).
 Notes
 -----
 
-The core of the library consists of just a few lines of Python, using `pypugjs <https://github.com/akubera/pypugjs>`_ to parse Pug templates,  optionally including stylesheets from the Semantic UI CSS framework, and finally calling `weasyprint <http://weasyprint.org/>`_ for PDF generation.
+The core of the library consists of just a few lines of Python, using `pypugjs <https://github.com/akubera/pypugjs>`_ to parse Pug templates,  optionally including stylesheets from the Semantic UI CSS framework, and finally calling `weasyprint <http://weasyprint.org/>`_ for PDF generation. Please refer to the Weasyprint documentation for the customization of templates. For instance, to customize the page margins and numbering the Weasyprint way, add this to your SCSS code:
+
+.. code:: scss
+
+    @page {
+        margin: 1cm 0 2cm 0cm;
+        @bottom-center {
+            content: "Page " counter(page) " / " counter(pages);
+            font-family: 'Lato';
+        }
+    }
+
 
 Using Semantic UI implies that (1) the Lato font family should be installed on your machine, otherwise the results will look less good, and (2) the first time that ``write_pdf`` is called in a Python session, if using the default Semantic UI style, the parsing of the CSS will add a 3-second overhead to the function calls (but there will be no overhead for the next calls in that session).
 
