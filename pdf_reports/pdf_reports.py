@@ -36,7 +36,12 @@ import tempfile
 import warnings
 from io import BytesIO
 from . import tools
-from functools import lru_cache
+
+
+try:
+    from functools import lru_cache
+except ImportError:
+    from backports.functools_lru_cache import lru_cache
 
 THIS_PATH = os.path.dirname(os.path.realpath(__file__))
 SEMANTIC_UI_CSS = os.path.join(THIS_PATH, 'css', 'semantic.min.css')
