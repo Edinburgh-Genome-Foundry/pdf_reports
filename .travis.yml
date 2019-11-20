@@ -1,7 +1,6 @@
 language: python
 python:
   - "3.6"
-  - "2.7"
 # command to install dependencies
 before_install:
   - pip install pytest==3.2.3 pytest-cov==2.6 coveralls PyPDF2 matplotlib libsass
