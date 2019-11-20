@@ -27,4 +27,4 @@ setup(name='pdf_reports',
       packages=find_packages(exclude='docs'),
       include_package_data=True,
       install_requires=["pypugjs", "jinja2", "weasyprint", "beautifulsoup4",
-                        "pandas", "Markdown"])
+                        "pandas", "Markdown","backports.functools-lru-cache"])
