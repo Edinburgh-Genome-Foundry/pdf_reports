@@ -60,7 +60,7 @@ def dataframe_to_html(
         )
     classes = default_classes + tuple(extra_classes)
     current_colwidth = pandas.get_option("display.max_colwidth")
-    pandas.set_option("display.max_colwidth", -1)
+    # pandas.set_option("display.max_colwidth", -1)
     result = dataframe.to_html(
         classes=classes, index=index, header=header, escape=escape_html
     )
