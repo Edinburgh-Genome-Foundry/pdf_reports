@@ -52,11 +52,11 @@ Infos
 
 `<https://edinburgh-genome-foundry.github.io/pdf_reports/>`_
 
-**Github Page**
+**Github Page:**
 
 `<https://github.com/Edinburgh-Genome-Foundry/pdf_reports>`_
 
-**Live demo**
+**Live demo:**
 
 `<http://cuba.genomefoundry.org/sculpt_a_sequence>`_
 

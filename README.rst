@@ -1,7 +1,7 @@
 .. raw:: html
 
     <p align="center">
-    <img alt="DNA Chisel Logo" title="DNA Chisel" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/pdf_reports/master/docs/_static/images/title.png" width="350">
+    <img alt="PDF Reports Logo" title="PDF Reports" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/pdf_reports/master/docs/_static/images/title.png" width="350">
     <br /><br />
     </p>
 
@@ -51,10 +51,10 @@ See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/
 create figures and tables on the flight.
 
 Other features
-----------------
+--------------
 
 Preloading CSS and  SCSS
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 PDF Reports provides a ``preload_stylesheet`` method which can be used to load
 and parse a CSS file. It also works with SCSS files (which will automatically
@@ -93,7 +93,7 @@ names. It can be used to avoid repeating yourself across your application:
     report_writer.write_report(html, "example_reportwriter.pdf")
 
 Markdown support
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 As a feature of PyPugJS, markdown is supported in the Pug templates.
 
@@ -109,7 +109,7 @@ As a feature of PyPugJS, markdown is supported in the Pug templates.
 
 
 PDF tools
-~~~~~~~~~~
+~~~~~~~~~
 
 Some useful functions for generating reports are available from inside the
 Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()``
@@ -119,7 +119,7 @@ Have a look at the docs, or this
 `example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_
 
 JupyterPDF
-~~~~~~~~~~~~
+~~~~~~~~~~
 
 The ``JupyterPDF`` class eases report templates writing by embedding PDF files
 in Jupyter notebooks (using the browser's interactive PDF viewer).
@@ -136,7 +136,7 @@ in Jupyter notebooks (using the browser's interactive PDF viewer).
 Notes
 -----
 
-The core of the library consists of just a few lines of Python, using `pypugjs <https://github.com/akubera/pypugjs>`_ to parse Pug templates,  optionally including stylesheets from the Semantic UI CSS framework, and finally calling `weasyprint <http://weasyprint.org/>`_ for PDF generation. Please refer to the Weasyprint documentation for the customization of templates. For instance, to customize the page margins and numbering the Weasyprint way, add this to your SCSS code:
+The core of the library consists of just a few lines of Python, using `pypugjs <https://github.com/akubera/pypugjs>`_ to parse Pug templates, optionally including stylesheets from the Semantic UI CSS framework, and finally calling `weasyprint <http://weasyprint.org/>`_ for PDF generation. Please refer to the Weasyprint documentation for the customization of templates. For instance, to customize the page margins and numbering the Weasyprint way, add this to your SCSS code:
 
 .. code:: scss
 
@@ -153,15 +153,15 @@ Using Semantic UI implies that (1) the Lato font family should be installed on y
 
 
 Installation
--------------
+------------
 
-You can install the library via PIP
+You can install the library via PIP:
 
 .. code::
 
     sudo pip install pdf_reports
 
-Alternatively, you can unzip the sources in a folder and type
+Alternatively, you can unzip the sources in a folder and type:
 
 .. code::
 
@@ -176,7 +176,7 @@ brew install pango
 ```
 
 License = MIT
---------------
+-------------
 
 This open-source software project was originally written at the `Edinburgh Genome Foundry <http://www.genomefoundry.org//>`_ by `Zulko <https://github.com/Zulko>`_
-and `released on Github <https://github.com/Edinburgh-Genome-Foundry/pdf_reports>`_ under the MIT licence (¢ Edinburg Genome Foundry). Everyone is welcome to contribute !
+and `released on Github <https://github.com/Edinburgh-Genome-Foundry/pdf_reports>`_ under the MIT licence (Copyright 2018 Edinburgh Genome Foundry). Everyone is welcome to contribute !
