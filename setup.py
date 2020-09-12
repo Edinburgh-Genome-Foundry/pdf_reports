@@ -5,26 +5,38 @@ try:
 except ImportError:
     try:
         import ez_setup
+
         ez_setup.use_setuptools()
     except ImportError:
-        raise ImportError("PDF_Reports could not be installed, probably because"
-                          " neither setuptools nor ez_setup are installed on"
-                          "this computer. \nInstall ez_setup "
-                          "([sudo] pip install ez_setup) and try again.")
+        raise ImportError(
+            "PDF_Reports could not be installed, probably because"
+            " neither setuptools nor ez_setup are installed on"
+            "this computer. \nInstall ez_setup "
+            "([sudo] pip install ez_setup) and try again."
+        )
 
 from setuptools import setup, find_packages
 
-exec(open('pdf_reports/version.py').read())  # loads __version__
+exec(open("pdf_reports/version.py").read())  # loads __version__
 
-setup(name='pdf_reports',
-      version=__version__,
-      author='Zulko',
-      url='https://github.com/Edinburgh-Genome-Foundry/pdf_reports',
-      description='Create nice-looking PDF reports from HTML content.',
-      long_description=open('pypi-readme.rst').read(),
-      license='MIT',
-      keywords="PDF report web jinja weasyprint",
-      packages=find_packages(exclude='docs'),
-      include_package_data=True,
-      install_requires=["pypugjs", "jinja2", "weasyprint", "beautifulsoup4",
-                        "pandas", "Markdown","backports.functools-lru-cache"])
+setup(
+    name="pdf_reports",
+    version=__version__,
+    author="Zulko",
+    url="https://github.com/Edinburgh-Genome-Foundry/pdf_reports",
+    description="Create nice-looking PDF reports from HTML content.",
+    long_description=open("pypi-readme.rst").read(),
+    license="MIT",
+    keywords="PDF report web jinja weasyprint",
+    packages=find_packages(exclude="docs"),
+    include_package_data=True,
+    install_requires=[
+        "pypugjs",
+        "jinja2",
+        "weasyprint",
+        "beautifulsoup4",
+        "pandas",
+        "Markdown",
+        "backports.functools-lru-cache",
+    ],
+)
