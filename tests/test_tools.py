@@ -37,3 +37,8 @@ def test_JupyterPDF():
 def test_now():
     now = tools.now(fmt="%Y-%m-%d %H:%M")
     assert now[4] == "-" and now[13] == ":" and len(now) == 16
+
+
+def test_wrap():
+    text = "abcde"
+    assert tools.wrap(text, col_width=4) == "abcd\ne"
