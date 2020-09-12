@@ -32,3 +32,8 @@ def test_tr_modifier():
 def test_JupyterPDF():
     pdf = tools.JupyterPDF("some_url.pdf")
     assert len(pdf._repr_html_()) > 40
+
+
+def test_now():
+    now = tools.now(fmt="%Y-%m-%d %H:%M")
+    assert now[4] == "-" and now[13] == ":" and len(now) == 16
