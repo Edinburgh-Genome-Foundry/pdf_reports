@@ -33,7 +33,7 @@ setup(
     install_requires=[
         "pypugjs",
         "jinja2",
-        "weasyprint",
+        "weasyprint<=52",
         "beautifulsoup4",
         "pandas",
         "Markdown",
