@@ -5,11 +5,12 @@
     <br /><br />
     </p>
 
+
 PDF_Reports
 ===========
 
-.. image:: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master
-   :target: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports
+.. image:: https://travis-ci.com/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master
+   :target: https://travis-ci.com/Edinburgh-Genome-Foundry/pdf_reports
    :alt: Travis CI build status
 
 .. image:: https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master
@@ -20,6 +21,7 @@ PDF_Reports
 *PDF Reports* (complete documentation `here <https://edinburgh-genome-foundry.github.io/pdf_reports/>`_) is a Python library to create nice-looking PDF reports from HTML or `Pug <https://pugjs.org>`_ templates. It features modern-looking components (via the `Semantic UI <https://semantic-ui.com/>`_ framework) and provides routines to embed tables or plots in the documents.
 
 Note that only Python 3.x is officially supported, although with the right version of weasyprint the library can also run on 2.x.
+
 
 Example of use
 --------------
@@ -50,8 +52,10 @@ And your final result may look like this (`PDF file <https://github.com/Edinburg
 See also `this example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_ embedding some python code in the template to
 create figures and tables on the flight.
 
+
 Other features
 --------------
+
 
 Preloading CSS and  SCSS
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,6 +96,7 @@ names. It can be used to avoid repeating yourself across your application:
     html = report_writer.pug_to_html(my_name="Zulko", my_organization="EGF")
     report_writer.write_report(html, "example_reportwriter.pdf")
 
+
 Markdown support
 ~~~~~~~~~~~~~~~~
 
@@ -116,7 +121,8 @@ Pug templates under ``pdf_tools``. For instance, ``pdf_tools.figure_data()``
 to embed matplotlib images, or ``pdf_tools.dataframe_to_html()``
 to turn Pandas dataframes into HTML, and style them nicely with Semantic UI.
 Have a look at the docs, or this
-`example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_
+`example <https://github.com/Edinburgh-Genome-Foundry/pdf_reports/blob/master/examples/example_with_plot_and_tables/with_plots_and_tables.pug>`_.
+
 
 JupyterPDF
 ~~~~~~~~~~
@@ -132,6 +138,7 @@ in Jupyter notebooks (using the browser's interactive PDF viewer).
 
     # At the end of the notebook cell:
     JupyterPDF("path_to_your.pdf")
+
 
 Notes
 -----
@@ -159,21 +166,18 @@ You can install the library via PIP:
 
 .. code::
 
-    sudo pip install pdf_reports
+    pip install pdf_reports
 
 Alternatively, you can unzip the sources in a folder and type:
 
 .. code::
 
-    sudo python setup.py install
+    python setup.py install
 
 **Note: on some Debian systems** you may need to first install ``libffi-dev`` (``apt install libffi-dev``). The package name may be ``libffi-devel`` on some systems.
 
-**Note: on macOS,** you may need to first install pango with:
+**Note: on macOS,** you may need to first install pango with: ``brew install pango``
 
-```
-brew install pango
-```
 
 License = MIT
 -------------
