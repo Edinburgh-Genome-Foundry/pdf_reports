@@ -167,13 +167,16 @@ def figure_data(fig, size=None, fmt="png", bbox_inches="tight", **kwargs):
     fig.savefig(output, format=fmt, bbox_inches=bbox_inches, **kwargs)
     fig.set_size_inches(original_size)
     data = output.getvalue()
-    if fmt == "svg":
-        svg_txt = data.decode()
-        svg_txt = "\n".join(svg_txt.split("\n")[4:])
-        svg_txt = "".join(svg_txt.split("\n"))
-        content = base64.b64encode(svg_txt.encode("utf-8"))
-    else:
-        content = base64.b64encode(data)
+    # This block prevented rendering SVG in Python 3.9 / newer dependencies.
+    # Apparently not needed anymore even for Python 3.6. In here for future reference.
+    # if fmt == "svg":
+    #     svg_txt = data.decode()
+    #     svg_txt = "\n".join(svg_txt.split("\n")[4:])
+    #     svg_txt = "".join(svg_txt.split("\n"))
+    #     content = base64.b64encode(svg_txt.encode("utf-8"))
+    # else:
+    # content = base64.b64encode(data)
+    content = base64.b64encode(data)
     result = b"data:image/%s+xml;base64,%s" % (fmt.encode("utf-8"), content)
     return result.decode("utf-8")
 
