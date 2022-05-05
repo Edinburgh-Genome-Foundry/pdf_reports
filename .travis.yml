@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.6"
+  - "3.9"
 # command to install dependencies
 before_install:
   # for WeasyPrint: https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#ubuntu-20-04
