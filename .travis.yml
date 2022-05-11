@@ -4,7 +4,7 @@ python:
 # command to install dependencies
 before_install:
   # for WeasyPrint: https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#ubuntu-20-04
-  # - sudo apt-get -y install python3-cffi python3-brotli libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0
+  - sudo apt-get -y install python3-cffi python3-brotli libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0
   - pip install --upgrade pip
   - pip install --upgrade pytest pytest-cov coveralls PyPDF2 matplotlib libsass
   - pip install -e .
