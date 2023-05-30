@@ -12,6 +12,8 @@ from io import BytesIO
 import datetime
 import textwrap
 
+from matplotlib.axes import Axes
+
 
 def dataframe_to_html(
     dataframe,
@@ -157,8 +159,7 @@ def figure_data(fig, size=None, fmt="png", bbox_inches="tight", **kwargs):
     **kwargs
       Any other option of Matplotlib's figure.savefig() method.
     """
-    if "AxesSubplot" in str(fig.__class__):
-        # A matplotlib axis was provided: take its containing figure.
+    if isinstance(fig, Axes):
         fig = fig.figure
     output = BytesIO()
     original_size = fig.get_size_inches()
