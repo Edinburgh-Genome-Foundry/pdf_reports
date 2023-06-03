@@ -5,7 +5,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from PyPDF2 import PdfFileReader
+from PyPDF2 import PdfReader
 
 
 def test_pug_to_html():
@@ -25,8 +25,8 @@ def test_basics(tmpdir):
     html = pug_to_html(template_path, title="Summary of your order")
     write_report(html, pdf_path)
     with open(pdf_path, "rb") as f:
-        reader = PdfFileReader(f)
-        assert reader.numPages == 2
+        reader = PdfReader(f)
+        assert len(reader.pages) == 2
 
     pdf_data = write_report(html)
     assert len(pdf_data) > 10000
@@ -49,8 +49,8 @@ def test_with_plots_and_tables(tmpdir):
     html = pug_to_html(template_path, dataframe=dataframe)
     write_report(html, pdf_path)
     with open(pdf_path, "rb") as f:
-        reader = PdfFileReader(f)
-        assert reader.numPages == 2
+        reader = PdfReader(f)
+        assert len(reader.pages) == 2
 
     pdf_data = write_report(html)
     assert len(pdf_data) > 10000
