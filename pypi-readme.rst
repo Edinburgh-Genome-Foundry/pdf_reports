@@ -1,14 +1,6 @@
 PDF Reports
 ===========
 
-.. image:: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master
-   :target: https://travis-ci.org/Edinburgh-Genome-Foundry/pdf_reports
-   :alt: Travis CI build status
-
-.. image:: https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master
-   :target: https://coveralls.io/github/Edinburgh-Genome-Foundry/pdf_reports?branch=master
-
-
 *PDF Reports* (complete documentation `here <https://edinburgh-genome-foundry.github.io/pdf_reports/>`_) is a Python library to create nice-looking PDF reports from HTML or `Pug <https://pugjs.org>`_ templates. It features modern-looking components (via the `Semantic UI <https://semantic-ui.com/>`_ framework) and provides routines to embed tables or plots in the documents.
 
 

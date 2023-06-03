@@ -9,9 +9,9 @@
 PDF_Reports
 ===========
 
-.. image:: https://travis-ci.com/Edinburgh-Genome-Foundry/pdf_reports.svg?branch=master
-   :target: https://travis-ci.com/Edinburgh-Genome-Foundry/pdf_reports
-   :alt: Travis CI build status
+.. image:: https://github.com/Edinburgh-Genome-Foundry/pdf_reports/actions/workflows/build.yml/badge.svg
+   :target: https://github.com/Edinburgh-Genome-Foundry/pdf_reports/actions/workflows/build.yml
+   :alt: GitHub CI build status
 
 .. image:: https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/pdf_reports/badge.svg?branch=master
    :target: https://coveralls.io/github/Edinburgh-Genome-Foundry/pdf_reports?branch=master
