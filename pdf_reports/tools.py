@@ -157,7 +157,7 @@ def figure_data(fig, size=None, fmt="png", bbox_inches="tight", **kwargs):
     **kwargs
       Any other option of Matplotlib's figure.savefig() method.
     """
-    if "AxesSubplot" in str(fig.__class__):
+    if "matplotlib.axes._axes.Axes" in str(fig.__class__):
         # A matplotlib axis was provided: take its containing figure.
         fig = fig.figure
     output = BytesIO()
