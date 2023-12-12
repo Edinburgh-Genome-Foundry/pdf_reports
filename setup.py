@@ -38,5 +38,6 @@ setup(
         "pandas",
         "Markdown",
         "backports.functools-lru-cache",
+        "matplotlib",
     ],
 )
