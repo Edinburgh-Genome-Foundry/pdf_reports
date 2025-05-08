@@ -1,4 +1,0 @@
-include *.txt
-recursive-include pdf_reports/css *
-include *.rst
-include ez_setup.py
