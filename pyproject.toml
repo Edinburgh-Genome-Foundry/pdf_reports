@@ -1,6 +1,6 @@
 [project]
 name = "pdf_reports"
-version = "0.3.8"
+version = "0.3.9"
 license = "MIT"
 authors = [{ name = "Zulko" }]
 description = "Create nice-looking PDF reports from HTML content."
